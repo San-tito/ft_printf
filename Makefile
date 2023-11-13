@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/13 17:33:03 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/13 18:10:45 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -74,19 +74,19 @@ banner:
 	@printf "%b" "$(NO_COLOR)"
 
 
-$(NAME):	${OBJS} $(LIBFT) 
+$(NAME):	$(LIBFT)  $(OBJS)
 			@printf "%-84b%b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
-			@${AR} ${NAME} ${OBJS}
+			@${AR} ${NAME} ${OBJS} 
 			
-objs/%.o: 	$(SRCS_PATH)/%.c
+objs/%.o: 	$(SRCS_PATH)/%.c Makefile $(LIBFT)
 			@printf "%-84b%b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 
-$(LIBFT):
+$(LIBFT):	
 			@printf "%-84b%b%b" "$(COM_COLOR)build libft library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			@cd $(LIBFT_PATH) && make > /dev/null
-			@cp $(LIBFT) $(NAME)
+			@mv $(LIBFT) $(NAME)
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null
