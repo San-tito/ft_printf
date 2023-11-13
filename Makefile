@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/13 16:29:54 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/13 16:45:14 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -50,9 +50,9 @@ NO_COLOR    = \033[m
 #                                 Makefile rules                             #
 ################################################################################
 
-all: header $(NAME)
+all: banner $(NAME)
 
-header:
+banner:
 	@printf "%b" "$(OK_COLOR)"
 	@echo
 	@echo "# **************************************************************************** #"
@@ -71,22 +71,22 @@ header:
 
 
 $(NAME):	${OBJS} 
-			@printf "%-84b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\n"
+			@printf "%-84b%b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			@${LIB} ${NAME} ${OBJS}
 			
 objs/%.o: 	$(SRCS_PATH)/%.c
-			@printf "%-84b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\n"
+			@printf "%-84b%b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 
-clean:		header
+clean:		banner
 			@rm -rf objs 
 			@printf "%-84b%b" "$(COM_COLOR)clean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
-fclean:		header clean
+fclean:		banner clean
 			@rm -rf $(NAME)
 			@printf "%-84b%b" "$(COM_COLOR)fclean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 re:			fclean all
 
-.PHONY:		all clean fclean re header
+.PHONY:		all clean fclean re banner
