@@ -31,6 +31,8 @@ LIBFT_PATH 		= ./libft
 
 LIBFT 			= $(LIBFT_PATH)/libft.a
 
+HEADER			= $(INCLUDE_PATH)/ft_printf.h
+
 SRCS			= ft_printf.c
 
 ################################################################################
@@ -75,18 +77,18 @@ banner:
 
 
 $(NAME):	$(LIBFT)  $(OBJS)
+			@mv $(LIBFT) $@
+			@${AR} $@ ${OBJS} 
 			@printf "%-84b%b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
-			@${AR} ${NAME} ${OBJS} 
 			
-objs/%.o: 	$(SRCS_PATH)/%.c Makefile $(LIBFT)
-			@printf "%-84b%b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
+			@printf "%-84b%b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 $(LIBFT):	
-			@printf "%-84b%b%b" "$(COM_COLOR)build libft library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			@cd $(LIBFT_PATH) && make > /dev/null
-			@mv $(LIBFT) $(NAME)
+			@printf "%-84b%b%b" "$(COM_COLOR)build libft library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null
