@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/13 16:52:20 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/13 17:33:03 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -17,7 +17,7 @@
 NAME	= libftprintf.a
 CC 		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-LIB		= ar -rcs
+AR		= ar -rcs
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -26,6 +26,10 @@ LIB		= ar -rcs
 SRCS_PATH		= ./src
 
 INCLUDE_PATH	= ./include
+
+LIBFT_PATH 		= ./libft
+
+LIBFT 			= $(LIBFT_PATH)/libft.a
 
 SRCS			= ft_printf.c
 
@@ -70,20 +74,27 @@ banner:
 	@printf "%b" "$(NO_COLOR)"
 
 
-$(NAME):	${OBJS} 
+$(NAME):	${OBJS} $(LIBFT) 
 			@printf "%-84b%b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
-			@${LIB} ${NAME} ${OBJS}
+			@${AR} ${NAME} ${OBJS}
 			
 objs/%.o: 	$(SRCS_PATH)/%.c
 			@printf "%-84b%b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 
+$(LIBFT):
+			@printf "%-84b%b%b" "$(COM_COLOR)build libft library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@cd $(LIBFT_PATH) && make > /dev/null
+			@cp $(LIBFT) $(NAME)
+
 clean:		banner
+			@cd $(LIBFT_PATH) && make clean > /dev/null
 			@rm -rf objs 
 			@printf "%-84b%b" "$(COM_COLOR)clean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 fclean:		banner clean
+			@cd $(LIBFT_PATH) && make fclean > /dev/null
 			@rm -rf $(NAME)
 			@printf "%-84b%b" "$(COM_COLOR)fclean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
