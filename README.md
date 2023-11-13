@@ -1,5 +1,5 @@
 # Printf
-![Build](https://github.com/San-tito/Libft/actions/workflows/c.yml/badge.svg)
+![Build](https://github.com/San-tito/ft_printf/actions/workflows/c.yml/badge.svg)
 
 The Printf project involves reprogramming the printf() function in C, providing a custom version that mimics the behavior of the original printf() from the standard library. The goal is to create a library, libftprintf.a, containing a function named ft_printf(). This function should replicate the functionality of the standard printf() with a focus on handling various conversion specifiers.
 # Usage
