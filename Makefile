@@ -77,7 +77,6 @@ banner:
 
 
 $(NAME):	$(LIBFT)  $(OBJS)
-			@mv $(LIBFT) $@
 			@${AR} $@ ${OBJS} 
 			@printf "%-84b%b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 			
@@ -88,6 +87,7 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 
 $(LIBFT):	
 			@cd $(LIBFT_PATH) && make > /dev/null
+			@cp $@ $(NAME)
 			@printf "%-84b%b%b" "$(COM_COLOR)build libft library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 clean:		banner
