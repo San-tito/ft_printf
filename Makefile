@@ -45,12 +45,13 @@ OBJS				= $(addprefix objs/, ${SRCS:.c=.o})
 #                                 Makefile logic                               #
 ################################################################################
 
-COM_COLOR   = \033[0;34m
-OBJ_COLOR   = \033[0;36m
-OK_COLOR    = \033[0;32m
-ERROR_COLOR = \033[0;31m
-WARN_COLOR  = \033[0;33m
-NO_COLOR    = \033[m
+RED         = \033[0;31m
+GREEN       = \033[0;32m
+YELLOW      = \033[0;33m
+BLUE        = \033[0;34m
+PURPLE      = \033[0;35m
+CYAN        = \033[0;36m
+RESET       = \033[m
 
 ################################################################################
 #                                 Makefile rules                             #
@@ -59,7 +60,7 @@ NO_COLOR    = \033[m
 all: banner $(NAME)
 
 banner:
-	@printf "%b" "$(OK_COLOR)"
+	@printf "%b" "$(PURPLE)"
 	@echo
 	@echo "# **************************************************************************** #"
 	@echo "#                                                                              #"
@@ -73,32 +74,32 @@ banner:
 	@echo "#                                                                              #"
 	@echo "# **************************************************************************** #"
 	@echo 
-	@printf "%b" "$(NO_COLOR)"
+	@printf "%b" "$(RESET)"
 
 
 $(NAME):	$(LIBFT)  $(OBJS)
 			@${AR} $@ ${OBJS} 
-			@printf "%-84b%b%b" "$(COM_COLOR)build library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@printf "%-84b%b%b" "$(BLUE)build library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
-			@printf "%-84b%b%b" "$(COM_COLOR)compiling:" "$(OBJ_COLOR)$<\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@printf "%-84b%b%b" "$(BLUE)compiling:" "$(CYAN)$<\t" "$(GREEN)[✓]$(RESET)\n"
 
 $(LIBFT):	
 			@cd $(LIBFT_PATH) && make > /dev/null
 			@cp $@ $(NAME)
-			@printf "%-84b%b%b" "$(COM_COLOR)build libft library:" "$(OBJ_COLOR)$@\t" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@printf "%-84b%b%b" "$(BLUE)build libft library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null
 			@rm -rf objs 
-			@printf "%-84b%b" "$(COM_COLOR)clean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@printf "%-84b%b" "$(BLUE)clean:" "$(GREEN)[✓]$(RESET)\n"
 
 fclean:		banner clean
 			@cd $(LIBFT_PATH) && make fclean > /dev/null
 			@rm -rf $(NAME)
-			@printf "%-84b%b" "$(COM_COLOR)fclean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@printf "%-84b%b" "$(BLUE)fclean:" "$(GREEN)[✓]$(RESET)\n"
 
 re:			fclean all
 
