@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/14 12:39:49 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/14 17:05:07 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -16,7 +16,7 @@
 
 NAME		= libftprintf.a
 CC 		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -g#-Wall -Wextra -Werror
 AR		= ar -rcs
 
 ################################################################################
@@ -33,7 +33,7 @@ LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-SRCS		= ft_printf.c
+SRCS		= ft_printf.c ft_handle_conversions.c
 
 ################################################################################
 #                                  Makefile  objs                              #
