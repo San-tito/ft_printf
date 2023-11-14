@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/13 18:10:45 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/14 12:39:49 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -57,7 +57,7 @@ RESET       	= \033[m
 #                                 Makefile rules                             #
 ################################################################################
 
-all: banner $(NAME)
+all: banner $(NAME) 
 
 banner:
 	@printf "%b" "$(PURPLE)"
@@ -77,19 +77,19 @@ banner:
 	@printf "%b" "$(RESET)"
 
 
-$(NAME):	$(LIBFT)  $(OBJS)
+$(NAME):	$(OBJS) $(LIBFT)
 			@${AR} $@ ${OBJS} 
-			@printf "%-84b%b%b" "$(BLUE)build library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
+			@printf "%-84b%b%b" "$(BLUE)Building library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
+
+$(LIBFT):	
+			@cd $(LIBFT_PATH) && make > /dev/null
+			@mv $(LIBFT) $(NAME)
+			@printf "%-84b%b%b" "$(BLUE)Building Libft library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
-			@printf "%-84b%b%b" "$(BLUE)compiling:" "$(CYAN)$<\t" "$(GREEN)[✓]$(RESET)\n"
-
-$(LIBFT):	
-			@cd $(LIBFT_PATH) && make > /dev/null
-			@cp $@ $(NAME)
-			@printf "%-84b%b%b" "$(BLUE)build libft library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
+			@printf "%-84b%b%b" "$(BLUE)Compiling:" "$(CYAN)$<\t" "$(GREEN)[✓]$(RESET)\n"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null
