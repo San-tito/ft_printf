@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:08:35 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/14 17:41:38 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/15 19:29:27 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ int	ft_putstr(char *str)
 	return (i);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *fmt, ...)
 {
 	va_list	arg;
 	char	*str;
+	int		count;
 
 	str = ft_calloc(1, sizeof(char *));
 	if (!str)
 		return (-1);
-	va_start(arg, format);
-	ft_handle_conversions((char *)format, arg, &str);
-	if (!str)
-		return (-1);
+	va_start(arg, fmt);
+	ft_handle_conversions((char *)fmt, arg, &str);
 	va_end(arg);
-	return (ft_putstr(str));
+	count = ft_putstr(str);
+	free(str);
+	return (count);
 }
