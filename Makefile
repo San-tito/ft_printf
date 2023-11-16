@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/15 18:48:56 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/16 12:04:20 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -33,7 +33,7 @@ LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-SRCS		= ft_printf.c ft_handle_conversions.c
+SRCS		= ft_printf.c ft_handle_conversions.c ft_string_operations.c
 
 ################################################################################
 #                                  Makefile  objs                              #
