@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_string_operations.c                             :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:49:27 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/19 19:03:07 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/19 22:04:06 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	ft_append_char(char **str, int c, int *count)
 	if (!new_str)
 		return (ft_free(1, (void **)str));
 	ft_memcpy(new_str, *str, *count);
-	*(new_str + *count) = c;
-	(*count)++;
+	*(new_str + (*count)++) = c;
 	ft_free(1, (void **)str);
 	*str = new_str;
 }
@@ -70,5 +69,3 @@ int	ft_find_index(const char *find, char c)
 	else
 		return (-1);
 }
-
-
