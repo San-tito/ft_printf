@@ -33,7 +33,7 @@ LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-SRCS		= ft_printf.c ft_handle_conversions.c ft_string_operations.c
+SRCS		= ft_printf.c ft_handle_format.c ft_utils.c
 
 ################################################################################
 #                                  Makefile  objs                              #

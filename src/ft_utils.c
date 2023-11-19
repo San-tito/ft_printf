@@ -70,3 +70,5 @@ int	ft_find_index(const char *find, char c)
 	else
 		return (-1);
 }
+
+

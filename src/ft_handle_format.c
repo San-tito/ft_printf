@@ -28,25 +28,25 @@ void	ft_handle_string(char **str, va_list arg, int *count)
 		ft_append_str(str, "(null)", count);
 }
 
-void	*ft_initialize_handlers(void)
+void	*ft_init_conversion_handlers(void)
 {
-	void	(**conversions)(char **, va_list, int *);
+	void	(**handlers)(char **, va_list, int *);
 
-	conversions = ft_calloc(2, sizeof(void (*)(char **, va_list, int *)));
-	if (!conversions)
+	handlers = ft_calloc(2, sizeof(void (*)(char **, va_list, int *)));
+	if (!handlers)
 		return (NULL);
-	*conversions = &ft_handle_char;
-	*(conversions + 1) = &ft_handle_string;
-	return ((void *)conversions);
+	*handlers = &ft_handle_char;
+	*(handlers + 1) = &ft_handle_string;
+	return ((void *)handlers);
 }
 
-void	ft_handle_conversions(char *format, va_list arg, char **str, int *count)
+void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 {
 	int		specifier;
-	void	(**conversions)(char **, va_list, int *);
+	void	(**handlers)(char **, va_list, int *);
 
-	conversions = ft_initialize_handlers();
-	if (!conversions)
+	handlers = ft_init_conversion_handlers();
+	if (!handlers)
 		return (ft_free(1, (void **)str));
 	while (*format)
 	{
@@ -54,13 +54,13 @@ void	ft_handle_conversions(char *format, va_list arg, char **str, int *count)
 		{
 			specifier = ft_find_index(CONVERSIONS, *++format);
 			if (specifier != -1)
-				(*(conversions + specifier))(str, arg, count);
+				(*(handlers + specifier))(str, arg, count);
 		}
 		else
 			ft_append_char(str, *format, count);
 		if (!str)
-			return (ft_free(1, (void **)conversions));
+			return (ft_free(1, (void **)handlers));
 		format++;
 	}
-	ft_free(1, &conversions);
+	ft_free(1, &handlers);
 }

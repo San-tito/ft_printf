@@ -32,7 +32,7 @@ int	ft_printf(const char *fmt, ...)
 	if (!str)
 		return (-1);
 	va_start(arg, fmt);
-	ft_handle_conversions((char *)fmt, arg, &str, &count);
+	ft_handle_format((char *)fmt, arg, &str, &count);
 	va_end(arg);
 	return (ft_putstr(str, count));
 }
