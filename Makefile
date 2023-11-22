@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/22 20:34:49 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/22 23:17:23 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -60,8 +60,7 @@ RESET       	= \033[m
 all: banner $(NAME) 
 
 banner:
-	@printf "%b" "$(PURPLE)"
-	@echo
+	@echo -e "$(PURPLE)"
 	@echo "# **************************************************************************** #"
 	@echo "#                                                                              #"
 	@echo "#                                                         :::      ::::::::    #"
@@ -73,33 +72,32 @@ banner:
 	@echo "#                                                     ###   ########.fr        #"
 	@echo "#                                                                              #"
 	@echo "# **************************************************************************** #"
-	@echo 
-	@printf "%b" "$(RESET)"
+	@echo -e "$(RESET)"
 
 
 $(NAME):	$(OBJS) $(LIBFT)
 			@${AR} $@ ${OBJS} 
-			@printf "%-84b%b%b" "$(BLUE)Building library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
+			@echo -e "$(BLUE)Building library:\t\t\t\t\t\t\t\t$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
 
 $(LIBFT):	
 			@cd $(LIBFT_PATH) && make > /dev/null
 			@mv $(LIBFT) $(NAME)
-			@printf "%-84b%b%b" "$(BLUE)Building Libft library:" "$(CYAN)$@\t" "$(GREEN)[✓]$(RESET)\n"
+			@echo -e "$(BLUE)Building Libft library:\t\t\t\t\t\t\t\t$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
-			@printf "%-84b%b%b" "$(BLUE)Compiling:" "$(CYAN)$<\t" "$(GREEN)[✓]$(RESET)\n"
+			@echo -e "$(BLUE)Compiling:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null
 			@rm -rf objs 
-			@printf "%-84b%b" "$(BLUE)$@:" "$(GREEN)[✓]$(RESET)\n"
+			@echo -e "$(BLUE)$@:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 
 fclean:		banner clean
 			@cd $(LIBFT_PATH) && make fclean > /dev/null
 			@rm -rf $(NAME)
-			@printf "%-84b%b" "$(BLUE)$@:" "$(GREEN)[✓]$(RESET)\n"
+			@echo -e "$(BLUE)$@:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 
 re:			fclean all
 
