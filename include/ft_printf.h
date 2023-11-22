@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/19 22:03:32 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/22 20:12:00 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,12 @@ void	ft_free(int n, ...);
 // Conversion specifier handling functions
 void	ft_handle_char(char **str, va_list arg, int *count);
 void	ft_handle_string(char **str, va_list arg, int *count);
+void	ft_handle_pointer(char **str, va_list arg, int *count);
+void	ft_handle_decimal(char **str, va_list arg, int *count);
+void	ft_handle_udecimal(char **str, va_list arg, int *count);
+void	ft_handle_uhexa(char **str, va_list arg, int *count);
+void	ft_handle_lhexa(char **str, va_list arg, int *count);
+
+char	*ft_utoa(unsigned int value, const char *digits);
 
 #endif

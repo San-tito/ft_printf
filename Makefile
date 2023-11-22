@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/16 12:04:20 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/22 20:34:49 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -33,7 +33,7 @@ LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-SRCS		= ft_printf.c ft_handle_format.c ft_utils.c
+SRCS		= ft_handle_format.c ft_handle_hexa.c   ft_handle_number.c ft_handle_string.c ft_printf.c        ft_utils.c
 
 ################################################################################
 #                                  Makefile  objs                              #
@@ -94,12 +94,12 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null
 			@rm -rf objs 
-			@printf "%-84b%b" "$(BLUE)clean:" "$(GREEN)[✓]$(RESET)\n"
+			@printf "%-84b%b" "$(BLUE)$@:" "$(GREEN)[✓]$(RESET)\n"
 
 fclean:		banner clean
 			@cd $(LIBFT_PATH) && make fclean > /dev/null
 			@rm -rf $(NAME)
-			@printf "%-84b%b" "$(BLUE)fclean:" "$(GREEN)[✓]$(RESET)\n"
+			@printf "%-84b%b" "$(BLUE)$@:" "$(GREEN)[✓]$(RESET)\n"
 
 re:			fclean all
 

@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_handle_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 16:08:35 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/22 18:46:23 by sguzman          ###   ########.fr       */
+/*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
+/*   Updated: 2023/11/22 19:43:08 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str, int count)
+void	ft_handle_char(char **str, va_list arg, int *count)
 {
-	int	bytes_written;
+	char	c;
 
-	bytes_written = write(STDOUT, str, count);
-	ft_free(1, (void **)&str);
-	return (bytes_written);
+	c = va_arg(arg, int);
+	ft_append_char(str, c, count);
 }
 
-int	ft_printf(const char *fmt, ...)
+void	ft_handle_string(char **str, va_list arg, int *count)
 {
-	va_list	arg;
-	char	*str;
-	int		count;
+	char	*string;
 
-	count = 0;
-	str = ft_calloc(1, sizeof(char *));
-	if (!str)
-		return (-1);
-	va_start(arg, fmt);
-	ft_handle_format((char *)fmt, arg, &str, &count);
-	va_end(arg);
-	return (ft_putstr(str, count));
+	string = va_arg(arg, char *);
+	if (string)
+		ft_append_str(str, string, count);
+	else
+		ft_append_str(str, "(null)", count);
 }
