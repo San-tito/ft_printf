@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/23 17:07:23 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/23 20:10:48 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -83,22 +83,22 @@ $(NAME):	$(OBJS) $(LIBFT)
 $(LIBFT):	
 			@cd $(LIBFT_PATH) && make &> /dev/null
 			@mv $(LIBFT) $(NAME)
-			@echo "$(BLUE)Building Libft library:\t\t\t\t\t\t\t\t$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
+			@echo "$(BLUE)Building Libft library:$(SPACE)$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
-			@echo "$(BLUE)Compiling:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
+			@echo "$(BLUE)Compiling:$(SPACE)$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean &> /dev/null
 			@rm -rf objs 
-			@echo "$(BLUE)$@:\t\t\t\t\t\t\t\t$(CYAN)\t$(GREEN)[✓]$(RESET)"
+			@echo "$(BLUE)$@:$(SPACE)$(CYAN)\t$(GREEN)[✓]$(RESET)"
 
 fclean:		banner clean
 			@cd $(LIBFT_PATH) && make fclean &> /dev/null
 			@rm -rf $(NAME)
-			@echo "$(BLUE)$@:\t\t\t\t\t\t\t\t$(CYAN)\t$(GREEN)[✓]$(RESET)"
+			@echo "$(BLUE)$@:$(SPACE)$(CYAN)\t$(GREEN)[✓]$(RESET)"
 
 re:			fclean all
 
