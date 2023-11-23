@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/22 20:12:00 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:23:20 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	ft_handle_udecimal(char **str, va_list arg, int *count);
 void	ft_handle_uhexa(char **str, va_list arg, int *count);
 void	ft_handle_lhexa(char **str, va_list arg, int *count);
 
-char	*ft_utoa(unsigned int value, const char *digits);
+char	*ft_utoa(size_t value, const char *digits);
 
 #endif

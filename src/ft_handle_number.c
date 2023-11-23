@@ -6,18 +6,18 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/23 01:50:57 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:22:45 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_utoa(unsigned int value, const char *digits)
+char	*ft_utoa(size_t value, const char *digits)
 {
-	unsigned int	base;
-	int				len;
-	unsigned int	temp;
-	char			*str;
+	size_t	base;
+	int		len;
+	size_t	temp;
+	char	*str;
 
 	base = ft_strlen(digits);
 	len = 1;
