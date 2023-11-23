@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/22 23:17:23 by santito          ###   ########.fr        #
+#    Updated: 2023/11/23 01:59:33 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -16,7 +16,7 @@
 
 NAME		= libftprintf.a
 CC 		= gcc
-CFLAGS	= -g#-Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror
 AR		= ar -rcs
 
 ################################################################################
@@ -80,7 +80,7 @@ $(NAME):	$(OBJS) $(LIBFT)
 			@echo -e "$(BLUE)Building library:\t\t\t\t\t\t\t\t$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
 
 $(LIBFT):	
-			@cd $(LIBFT_PATH) && make > /dev/null
+			@cd $(LIBFT_PATH) && make &> /dev/null
 			@mv $(LIBFT) $(NAME)
 			@echo -e "$(BLUE)Building Libft library:\t\t\t\t\t\t\t\t$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
 			
@@ -90,12 +90,12 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@echo -e "$(BLUE)Compiling:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 
 clean:		banner
-			@cd $(LIBFT_PATH) && make clean > /dev/null
+			@cd $(LIBFT_PATH) && make clean &> /dev/null
 			@rm -rf objs 
 			@echo -e "$(BLUE)$@:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 
 fclean:		banner clean
-			@cd $(LIBFT_PATH) && make fclean > /dev/null
+			@cd $(LIBFT_PATH) && make fclean &> /dev/null
 			@rm -rf $(NAME)
 			@echo -e "$(BLUE)$@:\t\t\t\t\t\t\t\t$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
 

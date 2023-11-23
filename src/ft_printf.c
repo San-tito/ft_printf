@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:08:35 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/22 18:46:23 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/23 00:36:16 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_putstr(char *str, int count)
 	int	bytes_written;
 
 	bytes_written = write(STDOUT, str, count);
-	ft_free(1, (void **)&str);
+	ft_free(1, &str);
 	return (bytes_written);
 }
 

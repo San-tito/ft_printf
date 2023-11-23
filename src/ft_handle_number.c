@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/22 20:27:50 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/23 01:50:57 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*ft_utoa(unsigned int value, const char *digits)
 	int				len;
 	unsigned int	temp;
 	char			*str;
-	int				i;
 
 	base = ft_strlen(digits);
 	len = 1;
@@ -31,13 +30,12 @@ char	*ft_utoa(unsigned int value, const char *digits)
 	str = ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (i < len)
+	*(str + len) = '\0';
+	while (len)
 	{
-		*(str + i++) = *(digits + (value % base));
+		*(str + --len) = *(digits + (value % base));
 		value /= base;
 	}
-	*(str + i) = '\0';
 	return (str);
 }
 
@@ -47,7 +45,7 @@ void	ft_handle_decimal(char **str, va_list arg, int *count)
 	char	*string;
 
 	decimal = va_arg(arg, int);
-	string = ft_utoa(decimal, "0123456789");
+	string = ft_itoa(decimal);
 	if (!string)
 		return (ft_free(1, str));
 	ft_append_str(str, string, count);
