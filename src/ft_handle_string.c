@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/22 19:43:08 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:10:06 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_handle_string(char **str, va_list arg, int *count)
 
 	string = va_arg(arg, char *);
 	if (string)
-		ft_append_str(str, string, count);
+		ft_append_str(str, ft_strdup(string), count);
 	else
-		ft_append_str(str, "(null)", count);
+		ft_append_str(str, ft_strdup("(null)"), count);
 }

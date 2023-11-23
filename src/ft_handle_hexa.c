@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/23 12:32:00 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:06:26 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_handle_pointer(char **str, va_list arg, int *count)
 	string = ft_utoa(value, "0123456789abcdef");
 	if (!string)
 		return (ft_free(1, str));
-	ft_append_str(str, "0x", count);
+	ft_append_str(str, ft_strdup("0x"), count);
 	ft_append_str(str, string, count);
 }
 
