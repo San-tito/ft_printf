@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 16:01:40 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:19:56 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define STDOUT 1
 # define CONVERSIONS "cspdiuxX%"
+
+# define DIGITS_UPPER "0123456789ABCDEF"
+# define DIGITS_LOWER "0123456789abcdef"
 
 // Main printf function
 int		ft_printf(const char *fmt, ...);
