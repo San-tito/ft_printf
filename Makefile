@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/23 20:10:48 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/27 16:02:39 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -33,7 +33,13 @@ LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-SRCS		= ft_handle_format.c ft_handle_hexa.c   ft_handle_number.c ft_handle_string.c ft_printf.c        ft_utils.c
+SRCS =	\
+	ft_handle_format.c \
+	ft_handle_hex.c \
+	ft_handle_number.c \
+	ft_handle_string.c \
+	ft_printf.c \
+	ft_utils.c
 
 ################################################################################
 #                                  Makefile  objs                              #
@@ -52,7 +58,6 @@ BLUE        	= \033[0;34m
 PURPLE      	= \033[0;35m
 CYAN        	= \033[0;36m
 RESET       	= \033[m
-SPACE		= \t\t\t\t\t\t\t\t
 
 ################################################################################
 #                                 Makefile rules                             #
@@ -61,7 +66,8 @@ SPACE		= \t\t\t\t\t\t\t\t
 all: banner $(NAME) 
 
 banner:
-	@echo "$(PURPLE)"
+	@printf "%b" "$(PURPLE)"
+	@echo
 	@echo "# **************************************************************************** #"
 	@echo "#                                                                              #"
 	@echo "#                                                         :::      ::::::::    #"
@@ -73,32 +79,33 @@ banner:
 	@echo "#                                                     ###   ########.fr        #"
 	@echo "#                                                                              #"
 	@echo "# **************************************************************************** #"
-	@echo "$(RESET)"
+	@echo
+	@printf "%b" "$(RESET)"
 
 
 $(NAME):	$(OBJS) $(LIBFT)
 			@${AR} $@ ${OBJS} 
-			@echo "$(BLUE)Building library:$(SPACE)$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 $(LIBFT):	
 			@cd $(LIBFT_PATH) && make &> /dev/null
 			@mv $(LIBFT) $(NAME)
-			@echo "$(BLUE)Building Libft library:$(SPACE)$(CYAN)$@\t$(GREEN)[✓]$(RESET)"
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Libft library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
-			@echo "$(BLUE)Compiling:$(SPACE)$(CYAN)$<\t$(GREEN)[✓]$(RESET)"
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean &> /dev/null
 			@rm -rf objs 
-			@echo "$(BLUE)$@:$(SPACE)$(CYAN)\t$(GREEN)[✓]$(RESET)"
+			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
 
 fclean:		banner clean
 			@cd $(LIBFT_PATH) && make fclean &> /dev/null
 			@rm -rf $(NAME)
-			@echo "$(BLUE)$@:$(SPACE)$(CYAN)\t$(GREEN)[✓]$(RESET)"
+			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
 
 re:			fclean all
 

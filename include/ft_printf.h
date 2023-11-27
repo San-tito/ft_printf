@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/23 12:23:20 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:01:40 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void	ft_handle_char(char **str, va_list arg, int *count);
 void	ft_handle_string(char **str, va_list arg, int *count);
 void	ft_handle_pointer(char **str, va_list arg, int *count);
 void	ft_handle_decimal(char **str, va_list arg, int *count);
-void	ft_handle_udecimal(char **str, va_list arg, int *count);
-void	ft_handle_uhexa(char **str, va_list arg, int *count);
-void	ft_handle_lhexa(char **str, va_list arg, int *count);
+void	ft_handle_unsigned_decimal(char **str, va_list arg, int *count);
+void	ft_handle_upper_hex(char **str, va_list arg, int *count);
+void	ft_handle_lower_hex(char **str, va_list arg, int *count);
 
+// Utility function to convert an unsigned integer to a string
 char	*ft_utoa(size_t value, const char *digits);
 
 #endif

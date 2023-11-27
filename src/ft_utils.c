@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:49:27 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/23 00:57:19 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:15:54 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	ft_append_char(char **str, int c, int *count)
 {
 	char	*new_str;
 
+	if (!*str)
+		return ;
 	new_str = ft_calloc(*count + 1, sizeof(char));
 	if (!new_str)
-		return (ft_free(1, (void **)str));
+		return (ft_free(1, str));
 	ft_memcpy(new_str, *str, *count);
 	*(new_str + (*count)++) = c;
 	ft_free(1, str);
@@ -48,10 +50,14 @@ void	ft_append_str(char **str, const char *suffix, int *count)
 	size_t	suffix_len;
 	char	*new_str;
 
+	if (!*str)
+		return (ft_free(1, &suffix));
+	if (!suffix)
+		return (ft_free(1, str));
 	suffix_len = ft_strlen(suffix);
 	new_str = ft_calloc(*count + suffix_len, sizeof(char));
 	if (!new_str)
-		return (ft_free(1, str));
+		return (ft_free(2, str, &suffix));
 	ft_memcpy(new_str, *str, *count);
 	ft_memcpy(new_str + *count, suffix, suffix_len);
 	*count += suffix_len;

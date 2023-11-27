@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/22 20:34:12 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:58:03 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	*ft_init_conversion_handlers(void)
 	*(handlers + 2) = &ft_handle_pointer;
 	*(handlers + 3) = &ft_handle_decimal;
 	*(handlers + 4) = &ft_handle_decimal;
-	*(handlers + 5) = &ft_handle_udecimal;
-	*(handlers + 6) = &ft_handle_lhexa;
-	*(handlers + 7) = &ft_handle_uhexa;
+	*(handlers + 5) = &ft_handle_unsigned_decimal;
+	*(handlers + 6) = &ft_handle_lower_hex;
+	*(handlers + 7) = &ft_handle_upper_hex;
 	return ((void *)handlers);
 }
 

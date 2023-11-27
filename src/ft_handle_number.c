@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/23 12:22:45 by santito          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:57:49 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_utoa(size_t value, const char *digits)
 
 void	ft_handle_decimal(char **str, va_list arg, int *count)
 {
-	long	decimal;
+	int		decimal;
 	char	*string;
 
 	decimal = va_arg(arg, int);
@@ -51,7 +51,7 @@ void	ft_handle_decimal(char **str, va_list arg, int *count)
 	ft_append_str(str, string, count);
 }
 
-void	ft_handle_udecimal(char **str, va_list arg, int *count)
+void	ft_handle_unsigned_decimal(char **str, va_list arg, int *count)
 {
 	unsigned int	udecimal;
 	char			*string;
