@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/27 16:02:39 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/27 16:07:56 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -88,7 +88,7 @@ $(NAME):	$(OBJS) $(LIBFT)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 $(LIBFT):	
-			@cd $(LIBFT_PATH) && make &> /dev/null
+			@cd $(LIBFT_PATH) && make > /dev/null
 			@mv $(LIBFT) $(NAME)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Libft library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 			
@@ -98,12 +98,12 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
 clean:		banner
-			@cd $(LIBFT_PATH) && make clean &> /dev/null
+			@cd $(LIBFT_PATH) && make clean > /dev/null
 			@rm -rf objs 
 			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
 
 fclean:		banner clean
-			@cd $(LIBFT_PATH) && make fclean &> /dev/null
+			@cd $(LIBFT_PATH) && make fclean > /dev/null
 			@rm -rf $(NAME)
 			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
 
