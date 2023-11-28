@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/27 16:07:56 by sguzman          ###   ########.fr        #
+#    Updated: 2023/11/28 18:53:48 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -33,19 +33,27 @@ LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-SRCS =	\
-	ft_handle_format.c \
+SRCS =	ft_handle_format.c \
 	ft_handle_hex.c \
 	ft_handle_number.c \
 	ft_handle_string.c \
 	ft_printf.c \
 	ft_utils.c
 
+SRCS_BONUS =	ft_handle_format_bonus.c \
+	ft_handle_hex_bonus.c \
+	ft_handle_number_bonus.c \
+	ft_handle_string_bonus.c \
+	ft_printf_bonus.c \
+	ft_utils_bonus.c
+
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
 OBJS		= $(addprefix objs/, ${SRCS:.c=.o})
+
+OBJS_BONUS		= $(addprefix objs/, ${SRCS_BONUS:.c=.o})
 
 ################################################################################
 #                                 Makefile logic                               #
@@ -88,14 +96,18 @@ $(NAME):	$(OBJS) $(LIBFT)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 $(LIBFT):	
-			@cd $(LIBFT_PATH) && make > /dev/null
-			@mv $(LIBFT) $(NAME)
+			@cd $(LIBFT_PATH) && make bonus > /dev/null
+			@cp $(LIBFT) $(NAME)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Libft library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
+
+bonus:		$(OBJS_BONUS) $(LIBFT)
+			@${AR} $(NAME) ${OBJS_BONUS} 
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 clean:		banner
 			@cd $(LIBFT_PATH) && make clean > /dev/null

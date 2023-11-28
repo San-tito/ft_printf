@@ -6,11 +6,27 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 17:29:39 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/11/27 19:10:15 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_flagger_minus(t_flags *flags, int width)
+{
+	(*flags).left_justified += width;
+}
+
+void	*ft_init_flaggers(void)
+{
+	void	(**flaggers)(t_flags *, int);
+
+	flaggers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *)));
+	if (!flaggers)
+		return (NULL);
+	*flaggers = &ft_flagger_minus;
+	return ((void *)flaggers);
+}
 
 void	*ft_init_conversion_handlers(void)
 {
@@ -33,16 +49,23 @@ void	*ft_init_conversion_handlers(void)
 void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 {
 	int		specifier;
+	int		flag;
 	void	(**handlers)(char **, va_list, int *);
+	void	(**flaggers)(t_flags *, int);
+	t_flags	flags;
 
 	handlers = ft_init_conversion_handlers();
-	if (!handlers)
-		return (ft_free(1, str));
+	flaggers = ft_init_flaggers();
+	if (!handlers || !flaggers)
+		return (ft_free(3, str, handlers, flaggers));
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			specifier = ft_find_index(CONVERSIONS, *++format);
+			flag = ft_find_index(FLAGS, *++format);
+			if (flag != -1)
+				(*(flaggers + flag))(&flags, ft_atoi(format));
+			specifier = ft_find_index(CONVERSIONS, *format);
 			if (specifier == 8)
 				ft_append_char(str, *format, count);
 			else if (specifier != -1)
@@ -51,8 +74,8 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 		else
 			ft_append_char(str, *format, count);
 		if (!str)
-			return (ft_free(1, &handlers));
+			return (ft_free(2, &handlers, &flaggers));
 		format++;
 	}
-	ft_free(1, &handlers);
+	ft_free(2, &handlers, &flaggers);
 }
