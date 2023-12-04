@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/11/28 18:53:48 by sguzman          ###   ########.fr        #
+#    Updated: 2023/12/04 23:09:08 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -96,7 +96,7 @@ $(NAME):	$(OBJS) $(LIBFT)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 $(LIBFT):	
-			@cd $(LIBFT_PATH) && make bonus > /dev/null
+			@make bonus -C $(LIBFT_PATH) > /dev/null
 			@cp $(LIBFT) $(NAME)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Libft library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 			
@@ -110,12 +110,12 @@ bonus:		$(OBJS_BONUS) $(LIBFT)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 clean:		banner
-			@cd $(LIBFT_PATH) && make clean > /dev/null
+			@make clean -C $(LIBFT_PATH) > /dev/null
 			@rm -rf objs 
 			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
 
 fclean:		banner clean
-			@cd $(LIBFT_PATH) && make fclean > /dev/null
+			@make fclean -C $(LIBFT_PATH) > /dev/null
 			@rm -rf $(NAME)
 			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
 
