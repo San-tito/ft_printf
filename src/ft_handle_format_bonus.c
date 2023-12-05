@@ -6,16 +6,11 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/05 01:30:01 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/05 17:27:12 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_flagger_minus(t_flags *flags, int width)
-{
-	(*flags).left_justified += width;
-}
 
 void	ft_extract_flags(char **format, t_flags *flags,
 		void (**flaggers)(t_flags *, int))
@@ -26,10 +21,13 @@ void	ft_extract_flags(char **format, t_flags *flags,
 	*flags = (t_flags){0};
 	(*format)++;
 	flag = ft_find_index(FLAGS, **format);
-	while (**format && flag != -1)
+	while (**format && (flag != -1 || ft_isdigit(**format)))
 	{
+		if (flag != -1)
+			(*format)++;
+		else
+			flag = 6;
 		width = 0;
-		(*format)++;
 		if (ft_isdigit(**format))
 		{
 			width = ft_atoi(*format);
@@ -45,10 +43,16 @@ void	*ft_init_modification_flaggers(void)
 {
 	void	(**flaggers)(t_flags *, int);
 
-	flaggers = ft_calloc(8, sizeof(void (*)(t_flags *, int)));
+	flaggers = ft_calloc(7, sizeof(void (*)(t_flags *, int)));
 	if (!flaggers)
 		return (NULL);
-	*flaggers = &ft_flagger_minus;
+	*flaggers = &ft_flagger_left;
+	*(flaggers + 1) = &ft_flagger_zero;
+	*(flaggers + 2) = &ft_flagger_precision;
+	*(flaggers + 3) = &ft_flagger_form;
+	*(flaggers + 4) = &ft_flagger_space;
+	*(flaggers + 5) = &ft_flagger_sign;
+	*(flaggers + 6) = &ft_flagger_right;
 	return ((void *)flaggers);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/05 01:57:05 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/05 14:39:55 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_handle_char_flags(char **str, va_list arg, int *count, t_flags flags)
 
 	c = va_arg(arg, int);
 	ft_append_char(str, c, count);
-	while (flags.left_justified--)
+	while (flags.left_justified-- > 1)
 		ft_append_char(str, ' ', count);
 }
 
@@ -30,6 +30,6 @@ void	ft_handle_str_flags(char **str, va_list arg, int *count, t_flags flags)
 	if (!string)
 		string = "(null)";
 	ft_append_str(str, ft_strdup(string), count);
-	while (flags.left_justified--)
+	while (flags.left_justified-- > ft_strlen(string))
 		ft_append_char(str, ' ', count);
 }

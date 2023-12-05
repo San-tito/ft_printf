@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/04 23:09:08 by santito          ###   ########.fr        #
+#    Updated: 2023/12/05 17:20:19 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -40,12 +40,15 @@ SRCS =	ft_handle_format.c \
 	ft_printf.c \
 	ft_utils.c
 
-SRCS_BONUS =	ft_handle_format_bonus.c \
-	ft_handle_hex_bonus.c \
-	ft_handle_number_bonus.c \
-	ft_handle_string_bonus.c \
-	ft_printf_bonus.c \
-	ft_utils_bonus.c
+SRCS_BONUS =	ft_alignment_bonus.c \
+				ft_handle_format_bonus.c \
+				ft_handle_hex_bonus.c \
+				ft_handle_number_bonus.c \
+				ft_handle_string_bonus.c \
+				ft_precision_bonus.c \
+				ft_printf_bonus.c \
+				ft_space_sign_bonus.c \
+				ft_utils_bonus.c
 
 ################################################################################
 #                                  Makefile  objs                              #

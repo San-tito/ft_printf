@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/05 01:56:34 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/05 16:48:19 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_handle_upper_hex_flags(char **str, va_list arg, int *count,
 	if (!string)
 		return (ft_free(1, str));
 	ft_append_str(str, string, count);
-	while (flags.left_justified--)
+	while (flags.left_justified-- > ft_strlen(string))
 		ft_append_char(str, ' ', count);
 }
 
@@ -53,6 +53,6 @@ void	ft_handle_lower_hex_flags(char **str, va_list arg, int *count,
 	if (!string)
 		return (ft_free(1, str));
 	ft_append_str(str, string, count);
-	while (flags.left_justified--)
+	while (flags.left_justified-- > ft_strlen(string))
 		ft_append_char(str, ' ', count);
 }
