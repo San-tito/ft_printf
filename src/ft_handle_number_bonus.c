@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/05 01:31:30 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:56:51 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ft_handle_dec_flags(char **str, va_list arg, int *count, t_flags flags)
 	if (!string)
 		return (ft_free(1, str));
 	ft_append_str(str, string, count);
+	while (flags.left_justified--)
+		ft_append_char(str, ' ', count);
 }
 
 void	ft_handle_unsigned_dec_flags(char **str, va_list arg, int *count,
@@ -62,4 +64,6 @@ void	ft_handle_unsigned_dec_flags(char **str, va_list arg, int *count,
 	if (!string)
 		return (ft_free(1, str));
 	ft_append_str(str, string, count);
+	while (flags.left_justified--)
+		ft_append_char(str, ' ', count);
 }
