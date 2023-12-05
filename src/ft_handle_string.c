@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 15:10:45 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:21:26 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_handle_char(char **str, va_list arg, int *count)
 	ft_append_char(str, c, count);
 }
 
-void	ft_handle_string(char **str, va_list arg, int *count)
+void	ft_handle_str(char **str, va_list arg, int *count)
 {
 	char	*string;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_format.c                                 :+:      :+:    :+:   */
+/*   ft_handle_format_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 19:10:15 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:30:01 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,35 @@ void	ft_flagger_minus(t_flags *flags, int width)
 	(*flags).left_justified += width;
 }
 
-void	*ft_init_flaggers(void)
+void	ft_extract_flags(char **format, t_flags *flags,
+		void (**flaggers)(t_flags *, int))
+{
+	int	flag;
+	int	width;
+
+	*flags = (t_flags){0};
+	(*format)++;
+	flag = ft_find_index(FLAGS, **format);
+	while (**format && flag != -1)
+	{
+		width = 0;
+		(*format)++;
+		if (ft_isdigit(**format))
+		{
+			width = ft_atoi(*format);
+			while (ft_isdigit(**format))
+				(*format)++;
+		}
+		(*(flaggers + flag))(flags, width);
+		flag = ft_find_index(FLAGS, **format);
+	}
+}
+
+void	*ft_init_modification_flaggers(void)
 {
 	void	(**flaggers)(t_flags *, int);
 
-	flaggers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *)));
+	flaggers = ft_calloc(8, sizeof(void (*)(t_flags *, int)));
 	if (!flaggers)
 		return (NULL);
 	*flaggers = &ft_flagger_minus;
@@ -30,51 +54,46 @@ void	*ft_init_flaggers(void)
 
 void	*ft_init_conversion_handlers(void)
 {
-	void	(**handlers)(char **, va_list, int *);
+	void	(**handlers)(char **, va_list, int *, t_flags);
 
-	handlers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *)));
+	handlers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *, t_flags)));
 	if (!handlers)
 		return (NULL);
-	*handlers = &ft_handle_char;
-	*(handlers + 1) = &ft_handle_string;
-	*(handlers + 2) = &ft_handle_pointer;
-	*(handlers + 3) = &ft_handle_decimal;
-	*(handlers + 4) = &ft_handle_decimal;
-	*(handlers + 5) = &ft_handle_unsigned_decimal;
-	*(handlers + 6) = &ft_handle_lower_hex;
-	*(handlers + 7) = &ft_handle_upper_hex;
+	*handlers = &ft_handle_char_flags;
+	*(handlers + 1) = &ft_handle_str_flags;
+	*(handlers + 2) = &ft_handle_ptr_flags;
+	*(handlers + 3) = &ft_handle_dec_flags;
+	*(handlers + 4) = &ft_handle_dec_flags;
+	*(handlers + 5) = &ft_handle_unsigned_dec_flags;
+	*(handlers + 6) = &ft_handle_lower_hex_flags;
+	*(handlers + 7) = &ft_handle_upper_hex_flags;
 	return ((void *)handlers);
 }
 
 void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 {
 	int		specifier;
-	int		flag;
-	void	(**handlers)(char **, va_list, int *);
+	void	(**handlers)(char **, va_list, int *, t_flags);
 	void	(**flaggers)(t_flags *, int);
 	t_flags	flags;
 
 	handlers = ft_init_conversion_handlers();
-	flaggers = ft_init_flaggers();
+	flaggers = ft_init_modification_flaggers();
 	if (!handlers || !flaggers)
 		return (ft_free(3, str, handlers, flaggers));
-	while (*format)
+	while (*format && str)
 	{
 		if (*format == '%')
 		{
-			flag = ft_find_index(FLAGS, *++format);
-			if (flag != -1)
-				(*(flaggers + flag))(&flags, ft_atoi(format));
+			ft_extract_flags(&format, &flags, flaggers);
 			specifier = ft_find_index(CONVERSIONS, *format);
 			if (specifier == 8)
 				ft_append_char(str, *format, count);
 			else if (specifier != -1)
-				(*(handlers + specifier))(str, arg, count);
+				(*(handlers + specifier))(str, arg, count, flags);
 		}
 		else
 			ft_append_char(str, *format, count);
-		if (!str)
-			return (ft_free(2, &handlers, &flaggers));
 		format++;
 	}
 	ft_free(2, &handlers, &flaggers);

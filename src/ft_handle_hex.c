@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_hexa.c                                   :+:      :+:    :+:   */
+/*   ft_handle_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 16:17:49 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:20:40 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_handle_pointer(char **str, va_list arg, int *count)
+void	ft_handle_ptr(char **str, va_list arg, int *count)
 {
 	size_t	value;
 	char	*string;

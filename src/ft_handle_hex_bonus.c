@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_hexa.c                                   :+:      :+:    :+:   */
+/*   ft_handle_hex_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 16:17:49 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:31:15 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_handle_pointer(char **str, va_list arg, int *count)
+void	ft_handle_ptr_flags(char **str, va_list arg, int *count, t_flags flags)
 {
 	size_t	value;
 	char	*string;
@@ -25,7 +25,8 @@ void	ft_handle_pointer(char **str, va_list arg, int *count)
 	ft_append_str(str, string, count);
 }
 
-void	ft_handle_upper_hex(char **str, va_list arg, int *count)
+void	ft_handle_upper_hex_flags(char **str, va_list arg, int *count,
+		t_flags flags)
 {
 	size_t	hexa;
 	char	*string;
@@ -37,7 +38,8 @@ void	ft_handle_upper_hex(char **str, va_list arg, int *count)
 	ft_append_str(str, string, count);
 }
 
-void	ft_handle_lower_hex(char **str, va_list arg, int *count)
+void	ft_handle_lower_hex_flags(char **str, va_list arg, int *count,
+		t_flags flags)
 {
 	size_t	hexa;
 	char	*string;

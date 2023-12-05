@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 17:29:39 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:17:36 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	*ft_init_conversion_handlers(void)
 	if (!handlers)
 		return (NULL);
 	*handlers = &ft_handle_char;
-	*(handlers + 1) = &ft_handle_string;
-	*(handlers + 2) = &ft_handle_pointer;
-	*(handlers + 3) = &ft_handle_decimal;
-	*(handlers + 4) = &ft_handle_decimal;
-	*(handlers + 5) = &ft_handle_unsigned_decimal;
+	*(handlers + 1) = &ft_handle_str;
+	*(handlers + 2) = &ft_handle_ptr;
+	*(handlers + 3) = &ft_handle_dec;
+	*(handlers + 4) = &ft_handle_dec;
+	*(handlers + 5) = &ft_handle_unsigned_dec;
 	*(handlers + 6) = &ft_handle_lower_hex;
 	*(handlers + 7) = &ft_handle_upper_hex;
 	return ((void *)handlers);
@@ -38,7 +38,7 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 	handlers = ft_init_conversion_handlers();
 	if (!handlers)
 		return (ft_free(1, str));
-	while (*format)
+	while (*format && str)
 	{
 		if (*format == '%')
 		{
@@ -50,8 +50,6 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 		}
 		else
 			ft_append_char(str, *format, count);
-		if (!str)
-			return (ft_free(1, &handlers));
 		format++;
 	}
 	ft_free(1, &handlers);

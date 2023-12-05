@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 18:27:52 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 01:33:51 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	ft_free(int n, ...);
 
 // Conversion specifier handling functions
 void	ft_handle_char(char **str, va_list arg, int *count);
-void	ft_handle_string(char **str, va_list arg, int *count);
-void	ft_handle_pointer(char **str, va_list arg, int *count);
-void	ft_handle_decimal(char **str, va_list arg, int *count);
-void	ft_handle_unsigned_decimal(char **str, va_list arg, int *count);
+void	ft_handle_str(char **str, va_list arg, int *count);
+void	ft_handle_ptr(char **str, va_list arg, int *count);
+void	ft_handle_dec(char **str, va_list arg, int *count);
+void	ft_handle_unsigned_dec(char **str, va_list arg, int *count);
 void	ft_handle_upper_hex(char **str, va_list arg, int *count);
 void	ft_handle_lower_hex(char **str, va_list arg, int *count);
 
@@ -56,12 +56,39 @@ char	*ft_utoa(size_t value, const char *digits);
 
 /* BONUS */
 
+# define FLAGS "-0.# +"
+
 typedef struct s_flags
 {
-	int	specifier;
 	int	left_justified;
+	int	zero_padding;
+	int	alternative_form;
+	int	has_precision;
+	int	space_before;
+	int	show_sign;
 }		t_flags;
 
-# define FLAGS "-0.# +"
+// Initialize modification flaggers
+void	*ft_init_modification_flaggers(void);
+
+// Extract flags from format
+void	ft_extract_flags(char **format, t_flags *flags,
+		void (**flaggers)(t_flags *, int));
+
+// Conversion modifier functions
+void	ft_flagger_minus(t_flags *flags, int width);
+
+// Conversion specifier handling functions with flags
+void	ft_handle_char_flags(char **str, va_list arg, int *count,
+			t_flags flags);
+void	ft_handle_str_flags(char **str, va_list arg, int *count, t_flags flags);
+void	ft_handle_ptr_flags(char **str, va_list arg, int *count, t_flags flags);
+void	ft_handle_dec_flags(char **str, va_list arg, int *count, t_flags flags);
+void	ft_handle_unsigned_dec_flags(char **str, va_list arg, int *count,
+			t_flags flags);
+void	ft_handle_upper_hex_flags(char **str, va_list arg, int *count,
+			t_flags flags);
+void	ft_handle_lower_hex_flags(char **str, va_list arg, int *count,
+			t_flags flags);
 
 #endif
