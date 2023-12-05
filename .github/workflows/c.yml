@@ -17,3 +17,5 @@ jobs:
       run: git submodule update --init --recursive
     - name: make
       run: make
+    - name: make bonus
+      run: make bonus
