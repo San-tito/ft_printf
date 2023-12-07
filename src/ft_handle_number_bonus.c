@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/05 14:36:10 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/05 18:08:18 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ void	ft_handle_dec_flags(char **str, va_list arg, int *count, t_flags flags)
 	string = ft_itoa(decimal);
 	if (!string)
 		return (ft_free(1, str));
+	while (flags.right_justified-- > ft_strlen(string))
+		ft_append_char(str, ' ', count);
 	ft_append_str(str, string, count);
-	while (flags.left_justified--)
+	while (flags.left_justified-- > ft_strlen(string))
 		ft_append_char(str, ' ', count);
 }
 
@@ -63,7 +65,9 @@ void	ft_handle_unsigned_dec_flags(char **str, va_list arg, int *count,
 	string = ft_utoa(udecimal, "0123456789");
 	if (!string)
 		return (ft_free(1, str));
+	while (flags.right_justified-- > ft_strlen(string))
+		ft_append_char(str, ' ', count);
 	ft_append_str(str, string, count);
-	while (flags.left_justified--)
+	while (flags.left_justified-- > ft_strlen(string))
 		ft_append_char(str, ' ', count);
 }
