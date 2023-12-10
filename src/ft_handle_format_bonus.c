@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/07 16:11:32 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/10 16:12:32 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ void	ft_extract_flags(char **format, t_flags *flags,
 	int	width;
 
 	*flags = (t_flags){};
-	(*format)++;
-	flag = ft_find_index(FLAGS, **format);
+	flag = ft_find_index(FLAGS, *++(*format));
 	while (**format && (flag != -1 || ft_isdigit(**format)))
 	{
 		if (flag != -1)
 			(*format)++;
 		else
 			flag = 6;
-		width = 0;
+		width = 1;
 		if (ft_isdigit(**format))
 		{
 			width = ft_atoi(*format);
@@ -84,7 +83,7 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 	handlers = ft_init_conversion_handlers();
 	flaggers = ft_init_modification_flaggers();
 	if (!handlers || !flaggers)
-		return (ft_free(3, str, handlers, flaggers));
+		return (ft_free(3, str, &handlers, &flaggers));
 	while (*format && str)
 	{
 		if (*format == '%')
@@ -92,7 +91,7 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 			ft_extract_flags(&format, &flags, flaggers);
 			specifier = ft_find_index(CONVERSIONS, *format);
 			if (specifier == 8)
-				ft_append_char(str, *format, count);
+				ft_handle_perc_flags(str, count, flags);
 			else if (specifier != -1)
 				(*(handlers + specifier))(str, arg, count, flags);
 		}

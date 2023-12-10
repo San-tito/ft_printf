@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/07 18:43:24 by sguzman          ###   ########.fr        #
+#    Updated: 2023/12/10 11:18:30 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -109,7 +109,7 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
 bonus:		$(OBJS_BONUS) $(LIBFT)
-			@${AR} $(NAME) ${OBJS_BONUS} 
+			@$(AR) $(NAME) $(OBJS_BONUS) 
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 
 clean:		banner
@@ -124,4 +124,6 @@ fclean:		banner clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re banner
+.PHONY:		all clean fclean re banner 
+
+

@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/07 18:43:45 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/10 13:24:04 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		ft_flagger_sign(t_flags *flags, int width);
 void		ft_flagger_right(t_flags *flags, int width);
 
 // Conversion specifier handling functions with flags
+void		ft_handle_perc_flags(char **str, int *count, t_flags flags);
 void		ft_handle_char_flags(char **str, va_list arg, int *count,
 				t_flags flags);
 void		ft_handle_str_flags(char **str, va_list arg, int *count,
