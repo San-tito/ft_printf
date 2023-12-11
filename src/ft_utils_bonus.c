@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 17:14:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/11 17:14:24 by sguzman          ###   ########.fr       */
+/*   Created: 2023/12/11 17:20:09 by sguzman           #+#    #+#             */
+/*   Updated: 2023/12/11 17:20:15 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 void	ft_free(int n, ...)
 {
@@ -59,6 +59,25 @@ void	ft_append_str(char **str, const char *suffix, int *count)
 	ft_memcpy(new_str, *str, *count);
 	ft_memcpy(new_str + *count, suffix, suffix_len);
 	*count += suffix_len;
+	ft_free(2, str, &suffix);
+	*str = new_str;
+}
+
+void	ft_attach_str(char **str, const char *suffix)
+{
+	size_t	str_len;
+	size_t	suffix_len;
+	char	*new_str;
+
+	if (!*str || !suffix)
+		return (ft_free(2, str, &suffix));
+	suffix_len = ft_strlen(suffix);
+	str_len = ft_strlen(*str);
+	new_str = ft_calloc(str_len + suffix_len + 1, sizeof(char));
+	if (!new_str)
+		return (ft_free(2, str, &suffix));
+	ft_strlcpy(new_str, suffix, suffix_len + 1);
+	ft_strlcat(new_str, *str, suffix_len + str_len + 1);
 	ft_free(2, str, &suffix);
 	*str = new_str;
 }

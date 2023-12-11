@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/11 17:07:40 by sguzman          ###   ########.fr        #
+#    Updated: 2023/12/11 17:25:45 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -115,11 +115,9 @@ objs/%_bonus.o: 	$(SRCS_PATH)/%_bonus.c $(HEADER_BONUS) Makefile
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
-
-
-bonus:		$(OBJS_BONUS) $(LIBFT)
+bonus:		banner $(OBJS_BONUS) $(LIBFT)
 			@$(AR) $(NAME) $(OBJS_BONUS) 
-			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $(NAME) "$(GREEN)" "[✓]" "$(RESET)"
 
 clean:		banner
 			@make clean -C $(LIBFT_PATH) > /dev/null
