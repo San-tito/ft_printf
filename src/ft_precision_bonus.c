@@ -6,11 +6,11 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:14:59 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/10 13:37:36 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:11:07 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	ft_flagger_precision(t_flags *flags, int precision)
 {

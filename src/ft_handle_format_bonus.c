@@ -6,11 +6,11 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/10 16:12:32 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:14:42 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	ft_extract_flags(char **format, t_flags *flags,
 		void (**flaggers)(t_flags *, int))
@@ -62,14 +62,14 @@ void	*ft_init_conversion_handlers(void)
 	handlers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *, t_flags)));
 	if (!handlers)
 		return (NULL);
-	*handlers = &ft_handle_char_flags;
-	*(handlers + 1) = &ft_handle_str_flags;
-	*(handlers + 2) = &ft_handle_ptr_flags;
-	*(handlers + 3) = &ft_handle_dec_flags;
-	*(handlers + 4) = &ft_handle_dec_flags;
-	*(handlers + 5) = &ft_handle_unsigned_dec_flags;
-	*(handlers + 6) = &ft_handle_lower_hex_flags;
-	*(handlers + 7) = &ft_handle_upper_hex_flags;
+	*handlers = &ft_handle_char;
+	*(handlers + 1) = &ft_handle_str;
+	*(handlers + 2) = &ft_handle_ptr;
+	*(handlers + 3) = &ft_handle_dec;
+	*(handlers + 4) = &ft_handle_dec;
+	*(handlers + 5) = &ft_handle_unsigned_dec;
+	*(handlers + 6) = &ft_handle_lower_hex;
+	*(handlers + 7) = &ft_handle_upper_hex;
 	return ((void *)handlers);
 }
 
@@ -91,7 +91,7 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 			ft_extract_flags(&format, &flags, flaggers);
 			specifier = ft_find_index(CONVERSIONS, *format);
 			if (specifier == 8)
-				ft_handle_perc_flags(str, count, flags);
+				ft_handle_perc(str, count, flags);
 			else if (specifier != -1)
 				(*(handlers + specifier))(str, arg, count, flags);
 		}

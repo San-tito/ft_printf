@@ -6,13 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/10 16:00:24 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:14:04 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	ft_handle_perc_flags(char **str, int *count, t_flags flags)
+void	ft_handle_perc(char **str, int *count, t_flags flags)
 {
 	char	c;
 
@@ -24,7 +24,7 @@ void	ft_handle_perc_flags(char **str, int *count, t_flags flags)
 		ft_append_char(str, ' ', count);
 }
 
-void	ft_handle_char_flags(char **str, va_list arg, int *count, t_flags flags)
+void	ft_handle_char(char **str, va_list arg, int *count, t_flags flags)
 {
 	char	c;
 
@@ -36,7 +36,7 @@ void	ft_handle_char_flags(char **str, va_list arg, int *count, t_flags flags)
 		ft_append_char(str, ' ', count);
 }
 
-void	ft_handle_str_flags(char **str, va_list arg, int *count, t_flags flags)
+void	ft_handle_str(char **str, va_list arg, int *count, t_flags flags)
 {
 	char	*string;
 	size_t	str_len;

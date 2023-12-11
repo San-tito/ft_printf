@@ -6,11 +6,11 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:11:19 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/10 13:37:25 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:10:07 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	ft_flagger_left(t_flags *flags, int width)
 {

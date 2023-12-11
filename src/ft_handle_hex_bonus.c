@@ -6,13 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/10 16:05:57 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:13:40 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	ft_handle_ptr_flags(char **str, va_list arg, int *count, t_flags flags)
+void	ft_handle_ptr(char **str, va_list arg, int *count, t_flags flags)
 {
 	size_t	value;
 	char	*string;
@@ -31,8 +31,7 @@ void	ft_handle_ptr_flags(char **str, va_list arg, int *count, t_flags flags)
 		ft_append_char(str, ' ', count);
 }
 
-void	ft_handle_upper_hex_flags(char **str, va_list arg, int *count,
-		t_flags flags)
+void	ft_handle_upper_hex(char **str, va_list arg, int *count, t_flags flags)
 {
 	size_t	hexa;
 	char	*string;
@@ -57,8 +56,7 @@ void	ft_handle_upper_hex_flags(char **str, va_list arg, int *count,
 		ft_append_char(str, ' ', count);
 }
 
-void	ft_handle_lower_hex_flags(char **str, va_list arg, int *count,
-		t_flags flags)
+void	ft_handle_lower_hex(char **str, va_list arg, int *count, t_flags flags)
 {
 	size_t	hexa;
 	char	*string;

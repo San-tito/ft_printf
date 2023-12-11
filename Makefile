@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/10 11:18:30 by sguzman          ###   ########.fr        #
+#    Updated: 2023/12/11 17:07:40 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -32,6 +32,8 @@ LIBFT_PATH 	= ./libft
 LIBFT 		= $(LIBFT_PATH)/libft.a
 
 HEADER	= $(INCLUDE_PATH)/ft_printf.h
+
+HEADER_BONUS	= $(INCLUDE_PATH)/ft_printf_bonus.h
 
 SRCS =	ft_handle_format.c \
 	ft_handle_hex.c \
@@ -107,6 +109,13 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
+
+objs/%_bonus.o: 	$(SRCS_PATH)/%_bonus.c $(HEADER_BONUS) Makefile
+			@mkdir -p $(dir $@)
+			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
+
+
 
 bonus:		$(OBJS_BONUS) $(LIBFT)
 			@$(AR) $(NAME) $(OBJS_BONUS) 

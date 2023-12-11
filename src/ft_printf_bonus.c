@@ -6,11 +6,11 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:08:35 by sguzman           #+#    #+#             */
-/*   Updated: 2023/11/27 17:46:31 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:11:15 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	ft_putstr(char *str, int count)
 {
