@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/11 17:24:03 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/13 17:31:43 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ void	ft_handle_upper_hex(char **str, va_list arg, int *count, t_flags flags)
 	string = ft_utoa(hexa, DIGITS_UPPER);
 	if (!string)
 		return (ft_free(1, str));
-	if (flags.alternative_form)
+	if (flags.alternative_form && hexa)
 		ft_attach_str(&string, ft_strdup("0X"));
 	str_len = ft_strlen(string);
+	while (flags.precision-- > str_len)
+		ft_append_char(str, '0', count);
 	while (flags.zero_padding-- > str_len)
 		ft_append_char(str, '0', count);
 	while (flags.right_justified-- > str_len)
@@ -65,9 +67,11 @@ void	ft_handle_lower_hex(char **str, va_list arg, int *count, t_flags flags)
 	string = ft_utoa(hexa, DIGITS_LOWER);
 	if (!string)
 		return (ft_free(1, str));
-	if (flags.alternative_form)
+	if (flags.alternative_form && hexa)
 		ft_attach_str(&string, ft_strdup("0x"));
 	str_len = ft_strlen(string);
+	while (flags.precision-- > str_len)
+		ft_append_char(str, '0', count);
 	while (flags.zero_padding-- > str_len)
 		ft_append_char(str, '0', count);
 	while (flags.right_justified-- > str_len)

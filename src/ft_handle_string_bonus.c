@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/11 17:14:04 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/13 17:36:03 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,17 @@ void	ft_handle_str(char **str, va_list arg, int *count, t_flags flags)
 
 	string = va_arg(arg, char *);
 	if (!string)
-		string = "(null)";
+		string = ft_strdup("(null)");
+	else
+		string = ft_strdup(string);
+	if (flags.has_precision)
+		ft_reduce(&string, flags.precision);
+	if (flags.space_before)
+		ft_append_char(str, ' ', count);
 	str_len = ft_strlen(string);
 	while (flags.right_justified-- > str_len)
 		ft_append_char(str, ' ', count);
-	ft_append_str(str, ft_strdup(string), count);
+	ft_append_str(str, string, count);
 	while (flags.left_justified-- > str_len)
 		ft_append_char(str, ' ', count);
 }

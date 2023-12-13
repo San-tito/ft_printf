@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/11 15:43:38 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/13 16:42:07 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_flags
 	size_t	right_justified;
 	size_t	zero_padding;
 	size_t	alternative_form;
+	size_t	precision;
 	size_t	has_precision;
 	size_t	space_before;
 	size_t	show_sign;
@@ -60,6 +61,7 @@ int			ft_putstr(char *str, int count);
 void		ft_append_char(char **str, int c, int *count);
 void		ft_append_str(char **str, const char *suffix, int *count);
 void		ft_attach_str(char **str, const char *suffix);
+void		ft_reduce(char **str, int reductor);
 
 /* ************************************************************************** */
 /*                        Conversion specifier handling functions             */

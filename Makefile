@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/11 17:25:45 by sguzman          ###   ########.fr        #
+#    Updated: 2023/12/12 17:31:37 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -113,7 +113,7 @@ objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
 objs/%_bonus.o: 	$(SRCS_PATH)/%_bonus.c $(HEADER_BONUS) Makefile
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
-			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
+			@printf "%b%-42s%-42b%-30s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
 bonus:		banner $(OBJS_BONUS) $(LIBFT)
 			@$(AR) $(NAME) $(OBJS_BONUS) 
