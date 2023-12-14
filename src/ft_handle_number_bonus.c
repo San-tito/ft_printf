@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/13 17:25:44 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/14 19:53:10 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 		ft_append_char(str, '-', count);
 		str_len++;
 	}
+	else if (flags.space_before)
+		ft_append_char(str, ' ', count);
+	else if (flags.show_sign)
+		ft_append_char(str, '+', count);
 	string = ft_utoa(decimal, "0123456789");
-	if (!string)
-		return (ft_free(1, str));
 	precision = ft_strlen(string);
 	str_len += precision;
 	while (flags.precision-- > precision)
-		ft_append_char(str, '0', count);
+		ft_attach_str(&string, ft_strdup("0"));
 	while (flags.zero_padding-- > str_len)
 		ft_append_char(str, '0', count);
 	while (flags.right_justified-- > str_len)
@@ -79,11 +81,10 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
 
 	udecimal = va_arg(arg, unsigned int);
 	string = ft_utoa(udecimal, "0123456789");
-	if (!string)
-		return (ft_free(1, str));
 	str_len = ft_strlen(string);
 	while (flags.precision-- > str_len)
-		ft_append_char(str, '0', count);
+		ft_attach_str(&string, ft_strdup("0"));
+	str_len = ft_strlen(string);
 	while (flags.zero_padding-- > str_len)
 		ft_append_char(str, '0', count);
 	while (flags.right_justified-- > str_len)

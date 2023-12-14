@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:53:31 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/13 17:31:43 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/14 15:43:00 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	ft_handle_ptr(char **str, va_list arg, int *count, t_flags flags)
 
 	value = (size_t)va_arg(arg, void *);
 	string = ft_utoa(value, DIGITS_LOWER);
-	if (!string)
-		return (ft_free(1, str));
 	ft_attach_str(&string, ft_strdup("0x"));
 	str_len = ft_strlen(string);
 	while (flags.right_justified-- > str_len)
@@ -40,8 +38,6 @@ void	ft_handle_upper_hex(char **str, va_list arg, int *count, t_flags flags)
 	str_len = 0;
 	hexa = va_arg(arg, unsigned int);
 	string = ft_utoa(hexa, DIGITS_UPPER);
-	if (!string)
-		return (ft_free(1, str));
 	if (flags.alternative_form && hexa)
 		ft_attach_str(&string, ft_strdup("0X"));
 	str_len = ft_strlen(string);
@@ -65,8 +61,6 @@ void	ft_handle_lower_hex(char **str, va_list arg, int *count, t_flags flags)
 	str_len = 0;
 	hexa = va_arg(arg, unsigned int);
 	string = ft_utoa(hexa, DIGITS_LOWER);
-	if (!string)
-		return (ft_free(1, str));
 	if (flags.alternative_form && hexa)
 		ft_attach_str(&string, ft_strdup("0x"));
 	str_len = ft_strlen(string);
