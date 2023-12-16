@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/14 19:53:10 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/16 20:10:33 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,26 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 	long	decimal;
 	char	*string;
 	size_t	str_len;
-	size_t	precision;
 
-	str_len = 0;
 	decimal = va_arg(arg, int);
 	if (decimal < 0)
-	{
-		decimal = -decimal;
-		ft_append_char(str, '-', count);
-		str_len++;
-	}
-	else if (flags.space_before)
-		ft_append_char(str, ' ', count);
-	else if (flags.show_sign)
-		ft_append_char(str, '+', count);
-	string = ft_utoa(decimal, "0123456789");
-	precision = ft_strlen(string);
-	str_len += precision;
-	while (flags.precision-- > precision)
+		string = ft_utoa(-decimal, "0123456789");
+	else
+		string = ft_utoa(decimal, "0123456789");
+	str_len = ft_strlen(string);
+	while (flags.precision-- > str_len)
 		ft_attach_str(&string, ft_strdup("0"));
+	if (decimal < 0 || flags.space_before || flags.show_sign)
+		str_len++;
 	while (flags.zero_padding-- > str_len)
-		ft_append_char(str, '0', count);
+		ft_attach_str(&string, ft_strdup("0"));
+	if (decimal < 0)
+		ft_attach_str(&string, ft_strdup("-"));
+	else if (flags.space_before)
+		ft_attach_str(&string, ft_strdup(" "));
+	else if (flags.show_sign)
+		ft_attach_str(&string, ft_strdup("+"));
+	str_len = ft_strlen(string);
 	while (flags.right_justified-- > str_len)
 		ft_append_char(str, ' ', count);
 	ft_append_str(str, string, count);

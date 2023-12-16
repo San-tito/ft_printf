@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:17:20 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/11 17:11:22 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:29:35 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ void	ft_flagger_space(t_flags *flags, int width)
 void	ft_flagger_sign(t_flags *flags, int width)
 {
 	(*flags).show_sign += width;
+}
+
+int	is_activation_flag(int flag)
+{
+	return (flag >= 3 && flag <= 5);
 }

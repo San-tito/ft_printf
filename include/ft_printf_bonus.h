@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/14 18:31:55 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:29:22 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void		ft_flagger_right(t_flags *flags, int width);
 int			ft_find_index(const char *find, char c);
 void		ft_free(int n, ...);
 char		*ft_utoa(size_t value, const char *digits);
+int			is_activation_flag(int flag);
 
 #endif

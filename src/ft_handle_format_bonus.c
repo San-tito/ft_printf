@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/14 18:37:51 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:33:37 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_extract_flags(char **format, t_flags *flags,
 			(*format)++;
 		else
 			flag = 6;
-		if (flag < 3)
+		if (!is_activation_flag(flag))
 			width = 0;
-		if (ft_isdigit(**format) && flag != 4)
+		if (ft_isdigit(**format) && !is_activation_flag(flag))
 		{
 			width = ft_atoi(*format);
 			while (ft_isdigit(**format))
