@@ -1,100 +1,136 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/16 18:29:22 by sguzman          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
+#    Updated: 2023/12/16 20:24:04 by sguzman          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #    
 
-#ifndef FT_PRINTF_BONUS_H
-# define FT_PRINTF_BONUS_H
+################################################################################
+#                                     CONFIG                                   #
+################################################################################
 
-# include "../libft/libft.h"
-# include <stdarg.h>
+NAME		= libftprintf.a
+CC 		= gcc
+CFLAGS	= -Wall -Wextra -Werror -g
+AR		= ar -rcs
 
-# define STDOUT 1
-# define CONVERSIONS "cspdiuxX%"
+################################################################################
+#                                 PROGRAM'S SRCS                               #
+################################################################################
 
-# define DIGITS_UPPER "0123456789ABCDEF"
-# define DIGITS_LOWER "0123456789abcdef"
+SRCS_PATH	= ./src
 
-# define FLAGS "-0.# +"
+INCLUDE_PATH	= ./include
 
-typedef struct s_flags
-{
-	size_t	left_justified;
-	size_t	right_justified;
-	size_t	zero_padding;
-	size_t	alternative_form;
-	size_t	precision;
-	size_t	has_precision;
-	size_t	space_before;
-	size_t	show_sign;
-}			t_flags;
+LIBFT_PATH 	= ./libft
 
-/* ************************************************************************** */
-/*                                Main Function                               */
-/* ************************************************************************** */
-int			ft_printf(const char *format, ...);
+LIBFT 		= $(LIBFT_PATH)/libft.a
 
-/* ************************************************************************** */
-/*                          Format handling functions                         */
-/* ************************************************************************** */
-void		ft_handle_format(char *format, va_list arg, char **str, int *count);
-void		*ft_init_conversion_handlers(void);
-void		*ft_init_modification_flaggers(void);
-void		ft_extract_flags(char **format, t_flags *flags,
-				void (**flaggers)(t_flags *, int));
+HEADER	= $(INCLUDE_PATH)/ft_printf.h
 
-/* ************************************************************************** */
-/*                             Output functions                               */
-/* ************************************************************************** */
-int			ft_putstr(char *str, int count);
+HEADER_BONUS	= $(INCLUDE_PATH)/ft_printf_bonus.h
 
-/* ************************************************************************** */
-/*                          String manipulation functions                     */
-/* ************************************************************************** */
-void		ft_append_char(char **str, int c, int *count);
-void		ft_append_str(char **str, const char *suffix, int *count);
-void		ft_attach_str(char **str, const char *suffix);
-void		ft_reduce(char **str, int reductor);
+SRCS =	ft_handle_format.c \
+	ft_handle_hex.c \
+	ft_handle_number.c \
+	ft_handle_string.c \
+	ft_printf.c \
+	ft_utils.c
 
-/* ************************************************************************** */
-/*                        Conversion specifier handling functions             */
-/* ************************************************************************** */
-void		ft_handle_perc(char **str, int *count, t_flags flags);
-void		ft_handle_char(char **str, va_list arg, int *count, t_flags flags);
-void		ft_handle_str(char **str, va_list arg, int *count, t_flags flags);
-void		ft_handle_ptr(char **str, va_list arg, int *count, t_flags flags);
-void		ft_handle_dec(char **str, va_list arg, int *count, t_flags flags);
-void		ft_handle_unsigned_dec(char **str, va_list arg, int *count,
-				t_flags flags);
-void		ft_handle_upper_hex(char **str, va_list arg, int *count,
-				t_flags flags);
-void		ft_handle_lower_hex(char **str, va_list arg, int *count,
-				t_flags flags);
+SRCS_BONUS =	ft_alignment_bonus.c \
+				ft_handle_format_bonus.c \
+				ft_handle_hex_bonus.c \
+				ft_handle_number_bonus.c \
+				ft_handle_string_bonus.c \
+				ft_precision_bonus.c \
+				ft_printf_bonus.c \
+				ft_space_sign_bonus.c \
+				ft_utils_bonus.c
 
-/* ************************************************************************** */
-/*                        Conversion modifier handling functions              */
-/* ************************************************************************** */
-void		ft_flagger_left(t_flags *flags, int width);
-void		ft_flagger_zero(t_flags *flags, int width);
-void		ft_flagger_precision(t_flags *flags, int precision);
-void		ft_flagger_form(t_flags *flags, int precision);
-void		ft_flagger_space(t_flags *flags, int width);
-void		ft_flagger_sign(t_flags *flags, int width);
-void		ft_flagger_right(t_flags *flags, int width);
+################################################################################
+#                                  Makefile  objs                              #
+################################################################################
 
-/* ************************************************************************** */
-/*                           Utility functions                                */
-/* ************************************************************************** */
-int			ft_find_index(const char *find, char c);
-void		ft_free(int n, ...);
-char		*ft_utoa(size_t value, const char *digits);
-int			is_activation_flag(int flag);
+OBJS		= $(addprefix objs/, ${SRCS:.c=.o})
 
-#endif
+OBJS_BONUS		= $(addprefix objs/, ${SRCS_BONUS:.c=.o})
+
+################################################################################
+#                                 Makefile logic                               #
+################################################################################
+
+RED         	= \033[0;31m
+GREEN       	= \033[0;32m
+YELLOW      	= \033[0;33m
+BLUE        	= \033[0;34m
+PURPLE      	= \033[0;35m
+CYAN        	= \033[0;36m
+RESET       	= \033[m
+
+################################################################################
+#                                 Makefile rules                             #
+################################################################################
+
+all: banner $(NAME) 
+
+banner:
+	@printf "%b" "$(PURPLE)"
+	@echo
+	@echo "# **************************************************************************** #"
+	@echo "#                                                                              #"
+	@echo "#                                                         :::      ::::::::    #"
+	@echo "#    ft_printf                                          :+:      :+:    :+:    #"
+	@echo "#                                                     +:+ +:+         +:+      #"
+	@echo "#    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #"
+	@echo "#                                                 +#+#+#+#+#+   +#+            #"
+	@echo "#                                                      #+#    #+#              #"
+	@echo "#                                                     ###   ########.fr        #"
+	@echo "#                                                                              #"
+	@echo "# **************************************************************************** #"
+	@echo
+	@printf "%b" "$(RESET)"
+
+
+$(NAME):	$(OBJS) $(LIBFT)
+			@${AR} $@ ${OBJS} 
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
+
+$(LIBFT):	
+			@make bonus -C $(LIBFT_PATH) > /dev/null
+			@cp $(LIBFT) $(NAME)
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Libft library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
+			
+objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
+			@mkdir -p $(dir $@)
+			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
+
+objs/%_bonus.o: 	$(SRCS_PATH)/%_bonus.c $(HEADER_BONUS) Makefile
+			@mkdir -p $(dir $@)
+			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
+			@printf "%b%-42s%-42b%-30s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
+
+bonus:		banner $(OBJS_BONUS) $(LIBFT)
+			@$(AR) $(NAME) $(OBJS_BONUS) 
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $(NAME) "$(GREEN)" "[✓]" "$(RESET)"
+
+clean:		banner
+			@make clean -C $(LIBFT_PATH) > /dev/null
+			@rm -rf objs 
+			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
+
+fclean:		banner clean
+			@make fclean -C $(LIBFT_PATH) > /dev/null
+			@rm -rf $(NAME)
+			@printf "%b%-42s%-42b%b%s%b\n" "$(BLUE)" "$@:" "$(CYAN)" "$(GREEN)" "[✓]" "$(RESET)"
+
+re:			fclean all
+
+.PHONY:		all clean fclean re banner 
+
+
