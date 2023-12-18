@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/18 14:15:16 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/18 14:32:17 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
 	udecimal = va_arg(arg, unsigned int);
 	string = ft_utoa(udecimal, "0123456789");
 	str_len = ft_strlen(string);
+	if (flags.precision && flags.zero_padding)
+	{
+		flags.right_justified = flags.zero_padding;
+		flags.zero_padding = 0;
+	}
 	while (flags.precision-- > str_len)
 		ft_attach_str(&string, ft_strdup("0"));
 	str_len = ft_strlen(string);
