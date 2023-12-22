@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/18 14:32:17 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/22 18:33:48 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 		string = ft_utoa(-decimal, "0123456789");
 	else
 		string = ft_utoa(decimal, "0123456789");
+	if (flags.has_precision && !decimal && !flags.precision)
+		ft_reduce(&string, flags.precision);
 	str_len = ft_strlen(string);
 	if (flags.precision && flags.zero_padding)
 	{
@@ -85,6 +87,8 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
 
 	udecimal = va_arg(arg, unsigned int);
 	string = ft_utoa(udecimal, "0123456789");
+	if (flags.has_precision && !udecimal && !flags.precision)
+		ft_reduce(&string, flags.precision);
 	str_len = ft_strlen(string);
 	if (flags.precision && flags.zero_padding)
 	{

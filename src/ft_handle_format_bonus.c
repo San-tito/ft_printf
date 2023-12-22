@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/16 18:33:37 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/22 18:22:45 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	ft_extract_flags(char **format, t_flags *flags,
 
 	*flags = (t_flags){};
 	flag = ft_find_index(FLAGS, *++(*format));
+	if (flag == 4 && **format == ' ')
+	{
+		(*(flaggers + flag))(flags, 1);
+		flag = ft_find_index(FLAGS, *++(*format));
+	}
 	while (**format && (flag >= 0 || ft_isdigit(**format)))
 	{
 		width = 1;
