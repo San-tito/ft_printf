@@ -6,13 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 11:13:28 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/23 11:14:48 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	ft_extract_precision(char **format, t_flags *flags,
+static void	ft_extract_precision(char **format, t_flags *flags,
 		void (**flaggers)(t_flags *, int))
 {
 	int	precision;
