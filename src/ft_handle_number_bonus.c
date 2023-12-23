@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/22 18:33:48 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 16:47:52 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,19 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 	if (flags.has_precision && !decimal && !flags.precision)
 		ft_reduce(&string, flags.precision);
 	str_len = ft_strlen(string);
-	if (flags.precision && flags.zero_padding)
-	{
-		flags.right_justified = flags.zero_padding;
-		flags.zero_padding = 0;
-	}
-	while (flags.precision-- > str_len)
-		ft_attach_str(&string, ft_strdup("0"));
+	ft_complete_zero(&string, flags);
 	if (decimal < 0 || flags.space_before || flags.show_sign)
 		str_len++;
-	while (flags.zero_padding-- > str_len)
-		ft_attach_str(&string, ft_strdup("0"));
+	if (flags.zero_padding && flags.field_width)
+		while (flags.field_width-- > str_len)
+			ft_attach_str(&string, ft_strdup("0"));
 	if (decimal < 0)
 		ft_attach_str(&string, ft_strdup("-"));
 	else if (flags.space_before)
 		ft_attach_str(&string, ft_strdup(" "));
 	else if (flags.show_sign)
 		ft_attach_str(&string, ft_strdup("+"));
-	str_len = ft_strlen(string);
-	while (flags.right_justified-- > str_len)
-		ft_append_char(str, ' ', count);
-	ft_append_str(str, string, count);
-	while (flags.left_justified-- > str_len)
-		ft_append_char(str, ' ', count);
+	ft_adjust_field_width(str, string, count, flags);
 }
 
 void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
@@ -90,19 +80,9 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
 	if (flags.has_precision && !udecimal && !flags.precision)
 		ft_reduce(&string, flags.precision);
 	str_len = ft_strlen(string);
-	if (flags.precision && flags.zero_padding)
-	{
-		flags.right_justified = flags.zero_padding;
-		flags.zero_padding = 0;
-	}
-	while (flags.precision-- > str_len)
-		ft_attach_str(&string, ft_strdup("0"));
-	str_len = ft_strlen(string);
-	while (flags.zero_padding-- > str_len)
-		ft_append_char(str, '0', count);
-	while (flags.right_justified-- > str_len)
-		ft_append_char(str, ' ', count);
-	ft_append_str(str, string, count);
-	while (flags.left_justified-- > str_len)
-		ft_append_char(str, ' ', count);
+	ft_complete_zero(&string, flags);
+	if (flags.zero_padding && flags.field_width)
+		while (flags.field_width-- > str_len)
+			ft_attach_str(&string, ft_strdup("0"));
+	ft_adjust_field_width(str, string, count, flags);
 }

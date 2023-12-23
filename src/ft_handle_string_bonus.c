@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 11:05:00 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/23 16:25:49 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,7 @@ void	ft_handle_perc(char **str, int *count, t_flags flags)
 	char	c;
 
 	c = '%';
-	if (!flags.left_justify)
-	{
-		while (flags.field_width-- > 1)
-			ft_append_char(str, ' ', count);
-	}
-	ft_append_char(str, c, count);
-	if (flags.left_justify)
-	{
-		while (flags.field_width-- > 1)
-			ft_append_char(str, ' ', count);
-	}
+	ft_set_field_width(str, c, count, flags);
 }
 
 void	ft_handle_char(char **str, va_list arg, int *count, t_flags flags)
@@ -35,23 +25,12 @@ void	ft_handle_char(char **str, va_list arg, int *count, t_flags flags)
 	char	c;
 
 	c = va_arg(arg, int);
-	if (!flags.left_justify)
-	{
-		while (flags.field_width-- > 1)
-			ft_append_char(str, ' ', count);
-	}
-	ft_append_char(str, c, count);
-	if (flags.left_justify)
-	{
-		while (flags.field_width-- > 1)
-			ft_append_char(str, ' ', count);
-	}
+	ft_set_field_width(str, c, count, flags);
 }
 
 void	ft_handle_str(char **str, va_list arg, int *count, t_flags flags)
 {
 	char	*string;
-	size_t	str_len;
 
 	string = va_arg(arg, char *);
 	if (!string)
@@ -60,16 +39,5 @@ void	ft_handle_str(char **str, va_list arg, int *count, t_flags flags)
 		string = ft_strdup(string);
 	if (flags.has_precision)
 		ft_reduce(&string, flags.precision);
-	str_len = ft_strlen(string);
-	if (!flags.left_justify)
-	{
-		while (flags.field_width-- > str_len)
-			ft_append_char(str, ' ', count);
-	}
-	ft_append_char(str, c, count);
-	if (flags.left_justify)
-	{
-		while (flags.field_width-- > str_len)
-			ft_append_char(str, ' ', count);
-	}
+	ft_adjust_field_width(str, string, count, flags);
 }

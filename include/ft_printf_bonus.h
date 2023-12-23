@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 10:53:30 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/23 16:53:36 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 
 typedef struct s_flags
 {
-	size_t	left_justified:1;
+	size_t	left_justify:1;
 	size_t	zero_padding:1;
 	size_t	alternative_form:1;
 	size_t	space_before:1;
 	size_t	show_sign:1;
 	size_t	has_precision:1;
 	size_t	precision;
-	int	field_width;
+	size_t	field_width;
 }			t_flags;
 
 /* ************************************************************************** */
@@ -90,11 +90,20 @@ void		ft_flagger_sign(t_flags *flags, int active);
 void		ft_flagger_field(t_flags *flags, int width);
 
 /* ************************************************************************** */
+/*                           Flags utility functions                          */
+/* ************************************************************************** */
+void		ft_adjust_field_width(char **str, char *string, int *count,
+				t_flags flags);
+void		ft_set_field_width(char **str, char c, int *count, t_flags flags);
+
+void		ft_complete_zero(char **string, t_flags flags);
+
+/* ************************************************************************** */
 /*                           Utility functions                                */
 /* ************************************************************************** */
 int			ft_find_index(const char *find, char c);
 void		ft_free(int n, ...);
 char		*ft_utoa(size_t value, const char *digits);
-int			is_activation_flag(int flag);
+int			is_flag(int flag);
 
 #endif
