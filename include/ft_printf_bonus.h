@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 16:53:36 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 18:27:03 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void		ft_flagger_field(t_flags *flags, int width);
 void		ft_adjust_field_width(char **str, char *string, int *count,
 				t_flags flags);
 void		ft_set_field_width(char **str, char c, int *count, t_flags flags);
-
 void		ft_complete_zero(char **string, t_flags flags);
 
 /* ************************************************************************** */

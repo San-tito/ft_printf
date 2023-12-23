@@ -6,11 +6,37 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 16:47:52 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 18:23:23 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+static void	ft_put_preffix(char **string, t_flags flags, int decimal)
+{
+	if (decimal < 0)
+		ft_attach_str(string, ft_strdup("-"));
+	else if (flags.space_before)
+		ft_attach_str(string, ft_strdup(" "));
+	else if (flags.show_sign)
+		ft_attach_str(string, ft_strdup("+"));
+}
+
+static void	ft_zero_pad(char **string, t_flags flags, int decimal)
+{
+	int		field_width;
+	size_t	len;
+
+	if (!*string)
+		return ;
+	len = ft_strlen(*string);
+	if (decimal < 0 || flags.space_before || flags.show_sign)
+		len++;
+	field_width = flags.field_width - len;
+	if (flags.zero_padding)
+		while (field_width-- > 0)
+			ft_attach_str(string, ft_strdup("0"));
+}
 
 char	*ft_utoa(size_t value, const char *digits)
 {
@@ -43,7 +69,6 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 {
 	long	decimal;
 	char	*string;
-	size_t	str_len;
 
 	decimal = va_arg(arg, int);
 	if (decimal < 0)
@@ -52,19 +77,9 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 		string = ft_utoa(decimal, "0123456789");
 	if (flags.has_precision && !decimal && !flags.precision)
 		ft_reduce(&string, flags.precision);
-	str_len = ft_strlen(string);
 	ft_complete_zero(&string, flags);
-	if (decimal < 0 || flags.space_before || flags.show_sign)
-		str_len++;
-	if (flags.zero_padding && flags.field_width)
-		while (flags.field_width-- > str_len)
-			ft_attach_str(&string, ft_strdup("0"));
-	if (decimal < 0)
-		ft_attach_str(&string, ft_strdup("-"));
-	else if (flags.space_before)
-		ft_attach_str(&string, ft_strdup(" "));
-	else if (flags.show_sign)
-		ft_attach_str(&string, ft_strdup("+"));
+	ft_zero_pad(&string, flags, decimal);
+	ft_put_preffix(&string, flags, decimal);
 	ft_adjust_field_width(str, string, count, flags);
 }
 
@@ -73,16 +88,12 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
 {
 	size_t	udecimal;
 	char	*string;
-	size_t	str_len;
 
 	udecimal = va_arg(arg, unsigned int);
 	string = ft_utoa(udecimal, "0123456789");
 	if (flags.has_precision && !udecimal && !flags.precision)
 		ft_reduce(&string, flags.precision);
-	str_len = ft_strlen(string);
 	ft_complete_zero(&string, flags);
-	if (flags.zero_padding && flags.field_width)
-		while (flags.field_width-- > str_len)
-			ft_attach_str(&string, ft_strdup("0"));
+	ft_zero_pad(&string, flags, 1);
 	ft_adjust_field_width(str, string, count, flags);
 }
