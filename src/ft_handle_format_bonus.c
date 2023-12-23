@@ -6,11 +6,30 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/22 18:22:45 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 11:13:28 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+void	ft_extract_precision(char **format, t_flags *flags,
+		void (**flaggers)(t_flags *, int))
+{
+	int	precision;
+
+	if (**format == '.')
+	{
+		(*format)++;
+		precision = 0;
+		if (ft_isdigit(**format))
+		{
+			precision = ft_atoi(*format);
+			while (ft_isdigit(**format))
+				(*format)++;
+		}
+		(*(flaggers + 2))(flags, precision);
+	}
+}
 
 void	ft_extract_flags(char **format, t_flags *flags,
 		void (**flaggers)(t_flags *, int))
@@ -20,29 +39,20 @@ void	ft_extract_flags(char **format, t_flags *flags,
 
 	*flags = (t_flags){};
 	flag = ft_find_index(FLAGS, *++(*format));
-	if (flag == 4 && **format == ' ')
+	while (**format && is_activation_flag(flag))
 	{
 		(*(flaggers + flag))(flags, 1);
 		flag = ft_find_index(FLAGS, *++(*format));
 	}
-	while (**format && (flag >= 0 || ft_isdigit(**format)))
+	width = 0;
+	if (ft_isdigit(**format))
 	{
-		width = 1;
-		if (flag >= 0)
+		width = ft_atoi(*format);
+		while (ft_isdigit(**format))
 			(*format)++;
-		else
-			flag = 6;
-		if (!is_activation_flag(flag))
-			width = 0;
-		if (ft_isdigit(**format) && !is_activation_flag(flag))
-		{
-			width = ft_atoi(*format);
-			while (ft_isdigit(**format))
-				(*format)++;
-		}
-		(*(flaggers + flag))(flags, width);
-		flag = ft_find_index(FLAGS, **format);
 	}
+	(*(flaggers + 6))(flags, width);
+	ft_extract_precision(format, flags, flaggers);
 }
 
 void	*ft_init_modification_flaggers(void)
@@ -58,7 +68,7 @@ void	*ft_init_modification_flaggers(void)
 	*(flaggers + 3) = &ft_flagger_form;
 	*(flaggers + 4) = &ft_flagger_space;
 	*(flaggers + 5) = &ft_flagger_sign;
-	*(flaggers + 6) = &ft_flagger_right;
+	*(flaggers + 6) = &ft_flagger_field;
 	return ((void *)flaggers);
 }
 

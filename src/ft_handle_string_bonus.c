@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/22 13:10:34 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 11:05:00 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,17 @@ void	ft_handle_perc(char **str, int *count, t_flags flags)
 	char	c;
 
 	c = '%';
-	while (flags.right_justified-- > 1)
-		ft_append_char(str, ' ', count);
+	if (!flags.left_justify)
+	{
+		while (flags.field_width-- > 1)
+			ft_append_char(str, ' ', count);
+	}
 	ft_append_char(str, c, count);
-	while (flags.left_justified-- > 1)
-		ft_append_char(str, ' ', count);
+	if (flags.left_justify)
+	{
+		while (flags.field_width-- > 1)
+			ft_append_char(str, ' ', count);
+	}
 }
 
 void	ft_handle_char(char **str, va_list arg, int *count, t_flags flags)
@@ -29,11 +35,17 @@ void	ft_handle_char(char **str, va_list arg, int *count, t_flags flags)
 	char	c;
 
 	c = va_arg(arg, int);
-	while (flags.right_justified-- > 1)
-		ft_append_char(str, ' ', count);
+	if (!flags.left_justify)
+	{
+		while (flags.field_width-- > 1)
+			ft_append_char(str, ' ', count);
+	}
 	ft_append_char(str, c, count);
-	while (flags.left_justified-- > 1)
-		ft_append_char(str, ' ', count);
+	if (flags.left_justify)
+	{
+		while (flags.field_width-- > 1)
+			ft_append_char(str, ' ', count);
+	}
 }
 
 void	ft_handle_str(char **str, va_list arg, int *count, t_flags flags)
@@ -49,9 +61,15 @@ void	ft_handle_str(char **str, va_list arg, int *count, t_flags flags)
 	if (flags.has_precision)
 		ft_reduce(&string, flags.precision);
 	str_len = ft_strlen(string);
-	while (flags.right_justified-- > str_len)
-		ft_append_char(str, ' ', count);
-	ft_append_str(str, string, count);
-	while (flags.left_justified-- > str_len)
-		ft_append_char(str, ' ', count);
+	if (!flags.left_justify)
+	{
+		while (flags.field_width-- > str_len)
+			ft_append_char(str, ' ', count);
+	}
+	ft_append_char(str, c, count);
+	if (flags.left_justify)
+	{
+		while (flags.field_width-- > str_len)
+			ft_append_char(str, ' ', count);
+	}
 }

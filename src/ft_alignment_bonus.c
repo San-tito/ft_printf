@@ -6,23 +6,23 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:11:19 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/11 17:56:19 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 10:56:28 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	ft_flagger_left(t_flags *flags, int width)
+void	ft_flagger_left(t_flags *flags, int active)
 {
-	(*flags).left_justified += width;
+	(*flags).left_justified = active;
 }
 
-void	ft_flagger_right(t_flags *flags, int width)
+void	ft_flagger_zero(t_flags *flags, int active)
 {
-	(*flags).right_justified += width;
+	(*flags).zero_padding = active;
 }
 
-void	ft_flagger_zero(t_flags *flags, int width)
+void	ft_flagger_field(t_flags *flags, int width)
 {
-	(*flags).zero_padding += width;
+	(*flags).field_width += width;
 }

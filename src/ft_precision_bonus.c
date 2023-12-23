@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:14:59 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/16 18:28:03 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 10:55:32 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_flagger_precision(t_flags *flags, int precision)
 	(*flags).precision += precision;
 }
 
-void	ft_flagger_form(t_flags *flags, int precision)
+void	ft_flagger_form(t_flags *flags, int active)
 {
-	(*flags).alternative_form += precision;
+	(*flags).alternative_form = active;
 }
 
 void	ft_reduce(char **str, int precision)

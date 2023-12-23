@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/22 16:51:43 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/23 10:53:30 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 
 typedef struct s_flags
 {
-	size_t	left_justified;
-	size_t	right_justified;
-	size_t	zero_padding;
-	size_t	alternative_form;
+	size_t	left_justified:1;
+	size_t	zero_padding:1;
+	size_t	alternative_form:1;
+	size_t	space_before:1;
+	size_t	show_sign:1;
+	size_t	has_precision:1;
 	size_t	precision;
-	size_t	has_precision;
-	size_t	space_before;
-	size_t	show_sign;
+	int	field_width;
 }			t_flags;
 
 /* ************************************************************************** */
@@ -81,13 +81,13 @@ void		ft_handle_lower_hex(char **str, va_list arg, int *count,
 /* ************************************************************************** */
 /*                        Conversion modifier handling functions              */
 /* ************************************************************************** */
-void		ft_flagger_left(t_flags *flags, int width);
-void		ft_flagger_zero(t_flags *flags, int width);
+void		ft_flagger_left(t_flags *flags, int active);
+void		ft_flagger_zero(t_flags *flags, int active);
 void		ft_flagger_precision(t_flags *flags, int precision);
-void		ft_flagger_form(t_flags *flags, int precision);
-void		ft_flagger_space(t_flags *flags, int width);
-void		ft_flagger_sign(t_flags *flags, int width);
-void		ft_flagger_right(t_flags *flags, int width);
+void		ft_flagger_form(t_flags *flags, int active);
+void		ft_flagger_space(t_flags *flags, int active);
+void		ft_flagger_sign(t_flags *flags, int active);
+void		ft_flagger_field(t_flags *flags, int width);
 
 /* ************************************************************************** */
 /*                           Utility functions                                */
