@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 15:47:56 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/24 12:54:56 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 		if (*format == '%')
 		{
 			specifier = ft_find_index(CONVERSIONS, *++format);
-			if (specifier == 8)
-				ft_append_char(str, *format, count);
-			else if (specifier != -1)
+			if (specifier != -1)
 				(*(handlers + specifier))(str, arg, count);
+			else
+				ft_append_char(str, *format, count);
 		}
 		else
 			ft_append_char(str, *format, count);

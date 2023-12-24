@@ -6,17 +6,14 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 16:25:49 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/24 12:56:04 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	ft_handle_perc(char **str, int *count, t_flags flags)
+void	ft_handle_perc(char **str, char c, int *count, t_flags flags)
 {
-	char	c;
-
-	c = '%';
 	ft_set_field_width(str, c, count, flags);
 }
 

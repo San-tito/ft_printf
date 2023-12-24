@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/24 11:11:29 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/24 12:54:26 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 
 # define STDOUT 1
-# define CONVERSIONS "cspdiuxX%"
+# define CONVERSIONS "cspdiuxX"
 
 # define DIGITS "0123456789"
 # define DIGITS_UPPER "0123456789ABCDEF"
