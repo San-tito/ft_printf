@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/23 18:28:18 by sguzman          ###   ########.fr        #
+#    Updated: 2023/12/24 10:03:27 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -16,7 +16,8 @@
 
 NAME		= libftprintf.a
 CC 		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
+DFLAGS	= -MMD -MF $(@:.o=.d)
 AR		= ar -rcs
 
 ################################################################################
@@ -60,6 +61,10 @@ OBJS		= $(addprefix objs/, ${SRCS:.c=.o})
 
 OBJS_BONUS		= $(addprefix objs/, ${SRCS_BONUS:.c=.o})
 
+DEPS		= $(addprefix objs/, ${SRCS:.c=.d})
+
+DEPS_BONUS		= $(addprefix objs/, ${SRCS_BONUS:.c=.d})
+
 ################################################################################
 #                                 Makefile logic                               #
 ################################################################################
@@ -95,14 +100,21 @@ banner:
 	@echo
 	@printf "%b" "$(RESET)"
 
-
+-include $(DEPS) $(DEPS_BONUS)
+ifndef BONUS
 $(NAME):	$(OBJS) $(LIBFT)
-			@${AR} $@ ${OBJS} 
+			@cp $(LIBFT) $(NAME)
+			@$(AR) $@ $(OBJS) 
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
+else	
+$(NAME):	$(OBJS_BONUS) $(LIBFT)
+			@cp $(LIBFT) $(NAME)
+			@$(AR) $(NAME) $(OBJS_BONUS)
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $(NAME) "$(GREEN)" "[✓]" "$(RESET)"
+endif
 
 $(LIBFT):	
 			@make bonus -C $(LIBFT_PATH) > /dev/null
-			@cp $(LIBFT) $(NAME)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Libft library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 			
 objs/%.o: 	$(SRCS_PATH)/%.c $(HEADER) Makefile
@@ -115,9 +127,8 @@ objs/%_bonus.o: 	$(SRCS_PATH)/%_bonus.c $(HEADER_BONUS) Makefile
 			@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
 			@printf "%b%-42s%-42b%-30s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
-bonus:		banner $(OBJS_BONUS) $(LIBFT)
-			@$(AR) $(NAME) $(OBJS_BONUS) 
-			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $(NAME) "$(GREEN)" "[✓]" "$(RESET)"
+bonus: 
+	@make BONUS=1 --no-print-directory
 
 clean:		banner
 			@make clean -C $(LIBFT_PATH) > /dev/null
@@ -131,6 +142,6 @@ fclean:		banner clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re banner 
+.PHONY:		all clean fclean re banner bonus
 
 
