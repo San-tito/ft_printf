@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 15:31:23 by sguzman           #+#    #+#              #
-#    Updated: 2023/12/24 10:03:27 by santito          ###   ########.fr        #
+#    Updated: 2023/12/24 10:42:36 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #    
 
@@ -103,13 +103,13 @@ banner:
 -include $(DEPS) $(DEPS_BONUS)
 ifndef BONUS
 $(NAME):	$(OBJS) $(LIBFT)
-			@cp $(LIBFT) $(NAME)
+			@cp $(LIBFT) $@
 			@$(AR) $@ $(OBJS) 
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 else	
 $(NAME):	$(OBJS_BONUS) $(LIBFT)
-			@cp $(LIBFT) $(NAME)
-			@$(AR) $(NAME) $(OBJS_BONUS)
+			@cp $(LIBFT) $@
+			@$(AR) $@ $(OBJS_BONUS)
 			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $(NAME) "$(GREEN)" "[✓]" "$(RESET)"
 endif
 
@@ -128,7 +128,7 @@ objs/%_bonus.o: 	$(SRCS_PATH)/%_bonus.c $(HEADER_BONUS) Makefile
 			@printf "%b%-42s%-42b%-30s%b%s%b\n" "$(BLUE)" "Compiling:" "$(CYAN)" $< "$(GREEN)" "[✓]" "$(RESET)"
 
 bonus: 
-	@make BONUS=1 --no-print-directory
+			@make BONUS=1 --no-print-directory
 
 clean:		banner
 			@make clean -C $(LIBFT_PATH) > /dev/null
