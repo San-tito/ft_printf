@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 18:27:03 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/24 11:12:03 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define STDOUT 1
 # define CONVERSIONS "cspdiuxX%"
 
+# define DIGITS "0123456789"
 # define DIGITS_UPPER "0123456789ABCDEF"
 # define DIGITS_LOWER "0123456789abcdef"
 
@@ -26,14 +27,14 @@
 
 typedef struct s_flags
 {
-	size_t	left_justify:1;
-	size_t	zero_padding:1;
-	size_t	alternative_form:1;
-	size_t	space_before:1;
-	size_t	show_sign:1;
-	size_t	has_precision:1;
-	size_t	precision;
-	size_t	field_width;
+	int	left_justify:1;
+	int	zero_padding:1;
+	int	alternative_form:1;
+	int	space_before:1;
+	int	show_sign:1;
+	int	has_precision:1;
+	int	precision;
+	int	field_width;
 }			t_flags;
 
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/22 13:42:51 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/24 11:12:39 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count)
 	char	*string;
 
 	udecimal = va_arg(arg, unsigned int);
-	string = ft_utoa(udecimal, "0123456789");
+	string = ft_utoa(udecimal, DIGITS);
 	ft_append_str(str, string, count);
 }

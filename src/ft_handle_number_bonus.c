@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/23 18:23:23 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/24 11:13:00 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	ft_handle_dec(char **str, va_list arg, int *count, t_flags flags)
 
 	decimal = va_arg(arg, int);
 	if (decimal < 0)
-		string = ft_utoa(-decimal, "0123456789");
+		string = ft_utoa(-decimal, DIGITS);
 	else
-		string = ft_utoa(decimal, "0123456789");
+		string = ft_utoa(decimal, DIGITS);
 	if (flags.has_precision && !decimal && !flags.precision)
 		ft_reduce(&string, flags.precision);
 	ft_complete_zero(&string, flags);
@@ -90,7 +90,7 @@ void	ft_handle_unsigned_dec(char **str, va_list arg, int *count,
 	char	*string;
 
 	udecimal = va_arg(arg, unsigned int);
-	string = ft_utoa(udecimal, "0123456789");
+	string = ft_utoa(udecimal, DIGITS);
 	if (flags.has_precision && !udecimal && !flags.precision)
 		ft_reduce(&string, flags.precision);
 	ft_complete_zero(&string, flags);
