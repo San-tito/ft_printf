@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:09 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/28 14:19:07 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/28 16:27:31 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_find_index(const char *find, char c)
 	char	*found;
 
 	found = ft_strchr(find, c);
-	if (*found)
+	if (found && c)
 		return (found - find);
 	else
 		return (-1);

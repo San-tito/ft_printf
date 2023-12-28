@@ -6,13 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/28 14:39:05 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/28 16:47:32 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static void	ft_extract_precision(char **format, t_flags *flags,
+void	ft_extract_precision(char **format, t_flags *flags,
 		void (**flaggers)(t_flags *, int))
 {
 	int	precision;
@@ -59,7 +59,7 @@ void	*ft_init_modification_flaggers(void)
 {
 	void	(**flaggers)(t_flags *, int);
 
-	flaggers = ft_calloc(ft_strlen(FLAGS), sizeof(void (*)(t_flags *, int)));
+	flaggers = ft_calloc(7, sizeof(void (*)(t_flags *, int)));
 	if (!flaggers)
 		return (NULL);
 	*flaggers = &ft_flagger_left;
@@ -76,8 +76,7 @@ void	*ft_init_conversion_handlers(void)
 {
 	void	(**handlers)(char **, va_list, int *, t_flags);
 
-	handlers = ft_calloc(ft_strlen(CONVERSIONS), sizeof(void (*)(char **,
-					va_list, int *)));
+	handlers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *, t_flags)));
 	if (!handlers)
 		return (NULL);
 	*handlers = &ft_handle_char;
@@ -89,15 +88,6 @@ void	*ft_init_conversion_handlers(void)
 	*(handlers + 6) = &ft_handle_lower_hex;
 	*(handlers + 7) = &ft_handle_upper_hex;
 	return ((void *)handlers);
-}
-
-t_context	ft_init_context(void)
-{
-	t_context	context;
-
-	context.handlers = ft_init_conversion_handlers();
-	context.flaggers = ft_init_modification_flaggers();
-	return (context);
 }
 
 void	ft_handle_format(char *format, va_list arg, char **str, int *count)

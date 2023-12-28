@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:08:35 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/14 15:40:55 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/28 16:47:34 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ int	ft_putstr(char *str, int count)
 	bytes_written = write(STDOUT, str, count);
 	ft_free(1, &str);
 	return (bytes_written);
+}
+
+t_context	ft_init_context(void)
+{
+	t_context	context;
+
+	context.handlers = ft_init_conversion_handlers();
+	context.flaggers = ft_init_modification_flaggers();
+	return (context);
 }
 
 int	ft_printf(const char *format, ...)

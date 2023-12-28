@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/28 14:32:09 by santito          ###   ########.fr       */
+/*   Updated: 2023/12/28 16:48:00 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,21 @@
 
 typedef struct s_flags
 {
-	int left_justify : 1;
-	int zero_padding : 1;
-	int alternative_form : 1;
-	int space_before : 1;
-	int show_sign : 1;
-	int has_precision : 1;
-	int		precision;
-	int		field_width;
+	int	left_justify : 1;
+	int	zero_padding : 1;
+	int	alternative_form : 1;
+	int	space_before : 1;
+	int	show_sign : 1;
+	int	has_precision : 1;
+	int	precision;
+	int	field_width;
 }			t_flags;
 
 typedef struct s_context
 {
 	void	(**handlers)(char **, va_list, int *, t_flags);
 	void	(**flaggers)(t_flags *, int);
+
 }			t_context;
 
 /* ************************************************************************** */
@@ -54,8 +55,11 @@ int			ft_printf(const char *format, ...);
 void		ft_handle_format(char *format, va_list arg, char **str, int *count);
 void		*ft_init_conversion_handlers(void);
 void		*ft_init_modification_flaggers(void);
+t_context	ft_init_context(void);
 void		ft_extract_flags(char **format, t_flags *flags,
-			void (**flaggers)(t_flags *, int));
+				void (**flaggers)(t_flags *, int));
+void		ft_extract_precision(char **format, t_flags *flags,
+				void (**flaggers)(t_flags *, int));
 
 /* ************************************************************************** */
 /*                             Output functions                               */
