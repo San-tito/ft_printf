@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:36:14 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/24 14:00:03 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/28 19:21:11 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	ft_put_preffix(char **string, t_flags flags, int decimal)
 {
 	if (decimal < 0)
 		ft_attach_str(string, ft_strdup("-"));
-	else if (flags.space_before)
-		ft_attach_str(string, ft_strdup(" "));
 	else if (flags.show_sign)
 		ft_attach_str(string, ft_strdup("+"));
+	else if (flags.space_before)
+		ft_attach_str(string, ft_strdup(" "));
 }
 
 static void	ft_zero_pad(char **string, t_flags flags, int decimal)
