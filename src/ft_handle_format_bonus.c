@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/24 12:55:38 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/28 14:39:05 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*ft_init_modification_flaggers(void)
 {
 	void	(**flaggers)(t_flags *, int);
 
-	flaggers = ft_calloc(7, sizeof(void (*)(t_flags *, int)));
+	flaggers = ft_calloc(ft_strlen(FLAGS), sizeof(void (*)(t_flags *, int)));
 	if (!flaggers)
 		return (NULL);
 	*flaggers = &ft_flagger_left;
@@ -76,7 +76,8 @@ void	*ft_init_conversion_handlers(void)
 {
 	void	(**handlers)(char **, va_list, int *, t_flags);
 
-	handlers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *, t_flags)));
+	handlers = ft_calloc(ft_strlen(CONVERSIONS), sizeof(void (*)(char **,
+					va_list, int *)));
 	if (!handlers)
 		return (NULL);
 	*handlers = &ft_handle_char;
@@ -90,25 +91,34 @@ void	*ft_init_conversion_handlers(void)
 	return ((void *)handlers);
 }
 
+t_context	ft_init_context(void)
+{
+	t_context	context;
+
+	context.handlers = ft_init_conversion_handlers();
+	context.flaggers = ft_init_modification_flaggers();
+	return (context);
+}
+
 void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 {
-	int		specifier;
-	void	(**handlers)(char **, va_list, int *, t_flags);
-	void	(**flaggers)(t_flags *, int);
-	t_flags	flags;
+	int			specifier;
+	t_context	context;
+	t_flags		flags;
 
-	handlers = ft_init_conversion_handlers();
-	flaggers = ft_init_modification_flaggers();
-	if (!handlers || !flaggers)
-		return (ft_free(3, str, &handlers, &flaggers));
+	context = ft_init_context();
+	if (!context.handlers || !context.flaggers)
+		return (ft_free(3, str, &(context.handlers), &(context.flaggers)));
 	while (*format && str)
 	{
 		if (*format == '%')
 		{
-			ft_extract_flags(&format, &flags, flaggers);
+			ft_extract_flags(&format, &flags, context.flaggers);
 			specifier = ft_find_index(CONVERSIONS, *format);
+			if (!*format)
+				break ;
 			if (specifier != -1)
-				(*(handlers + specifier))(str, arg, count, flags);
+				(*(context.handlers + specifier))(str, arg, count, flags);
 			else
 				ft_handle_perc(str, *format, count, flags);
 		}
@@ -116,5 +126,5 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 			ft_append_char(str, *format, count);
 		format++;
 	}
-	ft_free(2, &handlers, &flaggers);
+	ft_free(2, &(context.handlers), &(context.flaggers));
 }

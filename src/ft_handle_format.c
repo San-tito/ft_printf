@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:28:12 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/24 12:54:56 by sguzman          ###   ########.fr       */
+/*   Updated: 2023/12/28 14:38:24 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_init_conversion_handlers(void)
 {
 	void	(**handlers)(char **, va_list, int *);
 
-	handlers = ft_calloc(8, sizeof(void (*)(char **, va_list, int *)));
+	handlers = ft_calloc(ft_strlen(CONVERSIONS), sizeof(void (*)(char **, va_list, int *)));
 	if (!handlers)
 		return (NULL);
 	*handlers = &ft_handle_char;
@@ -43,6 +43,8 @@ void	ft_handle_format(char *format, va_list arg, char **str, int *count)
 		if (*format == '%')
 		{
 			specifier = ft_find_index(CONVERSIONS, *++format);
+			if(!*format)
+				break;
 			if (specifier != -1)
 				(*(handlers + specifier))(str, arg, count);
 			else
