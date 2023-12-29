@@ -192,7 +192,9 @@ This project is protected under the [UNLICENSE](https://choosealicense.com/licen
 
 ## 👏 Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
+- [printf(3) — Linux manual page](https://man7.org/linux/man-pages/man3/printf.3.html)
+- [Formatted Output (The GNU C Library)](https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html)
+- [Table of Output Conversions (The GNU C Library)](https://www.gnu.org/software/libc/manual/html_node/Table-of-Output-Conversions.html)
 
 [**Return**](#Top)
 
