@@ -16,7 +16,7 @@
 
 NAME		= libftprintf.a
 CC 		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 DFLAGS	= -MMD -MF $(@:.o=.d)
 AR		= ar -rcs
 
