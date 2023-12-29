@@ -110,7 +110,7 @@ else
 $(NAME):	$(OBJS_BONUS) $(LIBFT)
 			@cp $(LIBFT) $@
 			@$(AR) $@ $(OBJS_BONUS)
-			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $(NAME) "$(GREEN)" "[✓]" "$(RESET)"
+			@printf "%b%-42s%-42b%-24s%b%s%b\n" "$(BLUE)" "Building Bonus library:" "$(CYAN)" $@ "$(GREEN)" "[✓]" "$(RESET)"
 endif
 
 $(LIBFT):	
