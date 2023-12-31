@@ -40,7 +40,45 @@ The `Printf` project involves reprogramming the printf() function in C, providin
 
 ## 📦 Features
 
-► INSERT-TEXT
+**Printf Functionality**: A custom implementation of the `printf` function.
+    
+```c
+    int ft_printf(const char *format, ...);
+```
+
+**Conversion Specifiers Handling**: Mimics the behavior of the original `printf()` with the following conversion specifiers:
+- `%c`: Prints a single character.
+- `%s`: Prints a string (as defined by the common C convention).
+- `%p`: The `void*` pointer argument is printed in hexadecimal format.
+- `%d`: Prints a decimal (base 10) number.
+- `%i`: Prints an integer in base 10.
+- `%u`: Prints an unsigned decimal (base 10) number.
+- `%x`: Prints a number in hexadecimal (base 16) lowercase format.
+- `%X`: Prints a number in hexadecimal (base 16) uppercase format.
+- `%%`: Prints a percent sign.
+
+**Flag Characters**: The character `%` is followed by zero or more of the following flags:
+- `#`: The value should be converted to an "alternate form". Variations include:
+       - For `x` and `X` conversions, "0x" or "0X" is prepended.
+- `0`: The value should be zero-padded. For numeric conversions, the converted value is padded on the left with zeros. If a precision is given, the 0 flag is ignored.
+- `-`: The converted value is left-adjusted on the field boundary. 
+- ` ` : A blank should be left before a positive number (or empty string) produced by a signed conversion.
+- `+`: A sign (`+` or `-`) should always be placed before a number produced by a signed conversion. Overrides a space if both are used.
+
+**Field Width**
+An optional decimal digit string (with a nonzero first digit) specifying a minimum field width. If the converted value has fewer characters than the field width, it will be padded with spaces on the left (or right if the left-adjustment flag is given).
+
+**Precision**
+An optional precision, in the form of a period (`.`) followed by an optional decimal digit string. If the precision is given as just `.` , the precision is taken to be zero.
+
+**How to Read Flags**: The conversion specification has the following general form:
+```c
+    % flags width [ . precision ] conversion
+```
+- `flags`: Zero or more flag characters that modify the normal behavior of the conversion specification.
+- `width`: An optional decimal integer specifying the minimum field width. If the normal conversion produces fewer characters than this, the field is padded with spaces to the specified width.
+- `.` (precision): An optional precision to specify the number of digits for numeric conversions or the maximum number of characters for string conversions.
+- `conversion`: A character that specifies the conversion to be applied.
 
 ---
 
@@ -80,38 +118,39 @@ The `Printf` project involves reprogramming the printf() function in C, providin
 
 | File                                                                 | Summary       |
 | ---                                                                  | ---           |
-| [Makefile](https://github.com/San-tito/ft_printf/blob/main/Makefile) | ► INSERT-TEXT |
+| [Makefile](https://github.com/San-tito/ft_printf/blob/main/Makefile) |  Makefile for compiling the library |
 
 </details>
 
 <details closed><summary>Src</summary>
 
-| File                                                                                                     | Summary       |
-| ---                                                                                                      | ---           |
-| [ft_utils_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_utils_bonus.c)                 | ► INSERT-TEXT |
-| [ft_utils.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_utils.c)                             | ► INSERT-TEXT |
-| [ft_space_sign_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_space_sign_bonus.c)       | ► INSERT-TEXT |
-| [ft_printf_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_printf_bonus.c)               | ► INSERT-TEXT |
-| [ft_printf.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_printf.c)                           | ► INSERT-TEXT |
-| [ft_precision_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_precision_bonus.c)         | ► INSERT-TEXT |
-| [ft_handle_string_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_string_bonus.c) | ► INSERT-TEXT |
-| [ft_handle_string.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_string.c)             | ► INSERT-TEXT |
-| [ft_handle_number_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_number_bonus.c) | ► INSERT-TEXT |
-| [ft_handle_number.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_number.c)             | ► INSERT-TEXT |
-| [ft_handle_hex_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_hex_bonus.c)       | ► INSERT-TEXT |
-| [ft_handle_hex.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_hex.c)                   | ► INSERT-TEXT |
-| [ft_handle_format_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_format_bonus.c) | ► INSERT-TEXT |
-| [ft_handle_format.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_format.c)             | ► INSERT-TEXT |
-| [ft_alignment_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_alignment_bonus.c)         | ► INSERT-TEXT |
+| File                                                                                                     | Summary|
+| ---                                                                                                      | ---|
+| [ft_utils_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_utils_bonus.c)                 | Utility functions for the bonus version of `ft_printf`.|
+| [ft_utils.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_utils.c)                             | Utility functions for the standard version of `ft_printf`.|
+| [ft_space_sign_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_space_sign_bonus.c)       | Functions handling space and sign flags for the bonus version of `ft_printf`.|
+| [ft_printf_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_printf_bonus.c)               | Main implementation of the bonus version of `ft_printf`.|
+| [ft_printf.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_printf.c)                           | Main implementation of the standard version of `ft_printf`.|
+| [ft_precision_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_precision_bonus.c)         | Functions handling precision for the bonus version of `ft_printf`.|
+| [ft_handle_string_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_string_bonus.c) | Functions handling string conversions for the bonus version of `ft_printf`.|
+| [ft_handle_string.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_string.c)             | Functions handling string conversions for the standard version of `ft_printf`.|
+| [ft_handle_number_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_number_bonus.c) | Functions handling numeric conversions for the bonus version of `ft_printf`.|
+| [ft_handle_number.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_number.c)             | Functions handling numeric conversions for the standard version of `ft_printf`.|
+| [ft_handle_hex_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_hex_bonus.c)       | Functions handling hexadecimal conversions for the bonus version of `ft_printf`.|
+| [ft_handle_hex.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_hex.c)                   | Functions handling hexadecimal conversions for the standard version of `ft_printf`.|
+| [ft_handle_format_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_format_bonus.c) | Functions handling format specifiers for the bonus version of `ft_printf`.|
+| [ft_handle_format.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_handle_format.c)             | Functions handling format specifiers for the standard version of `ft_printf`.|
+| [ft_alignment_bonus.c](https://github.com/San-tito/ft_printf/blob/main/src/ft_alignment_bonus.c)         | Functions handling alignment for the bonus version of `ft_printf`.|
 
 </details>
 
 <details closed><summary>Include</summary>
 
-| File                                                                                           | Summary       |
-| ---                                                                                            | ---           |
-| [ft_printf_bonus.h](https://github.com/San-tito/ft_printf/blob/main/include/ft_printf_bonus.h) | ► INSERT-TEXT |
-| [ft_printf.h](https://github.com/San-tito/ft_printf/blob/main/include/ft_printf.h)             | ► INSERT-TEXT |
+| File                                                                                           | Summary|
+| ---                                                                                            | ---|
+| [ft_printf_bonus.h](https://github.com/San-tito/ft_printf/blob/main/include/ft_printf_bonus.h) | Header file for the bonus version of `ft_printf`. Contains declarations for functions, structures, and flags related to the bonus features.                                                   |
+| [ft_printf.h](https://github.com/San-tito/ft_printf/blob/main/include/ft_printf.h)             | Header file for the standard version of `ft_printf`. Contains declarations for functions, structures, and flags related to the standard features.                                                 |
+
 
 </details>
 
@@ -120,24 +159,11 @@ The `Printf` project involves reprogramming the printf() function in C, providin
 
 ## 🚀 Getting Started
 
-***Dependencies***
-
-Please ensure you have the following dependencies installed on your system:
-
-- ℹ️ **C Compiler**: You will need a C compiler to build and run the project.
-
-    - Example for GCC (GNU Compiler Collection):
-      ```sh
-      sudo apt-get install gcc  # Ubuntu
-      sudo yum install gcc      # CentOS
-      ```
-
-
 ### 🔧 Installation
 
 1. Clone the ft_printf repository:
 ```sh
-git clone https://github.com/San-tito/ft_printf
+git clone --recursive https://github.com/San-tito/ft_printf
 ```
 
 2. Change to the project directory:
@@ -145,15 +171,16 @@ git clone https://github.com/San-tito/ft_printf
 cd ft_printf
 ```
 
-3. Install the dependencies:
+3. Compile the dependencies:
 ```sh
 make
 ```
 
 ### 🤖 Use ft_printf
-
+Once the library is successfully compiled, you can use it in your projects. Link the `libftprintf.a` file to your program, and include the `ft_printf.h` header in your source files.
+To compile your program with ft_printf, use:
 ```sh
-libftprintf.a
+gcc -o my_program my_program.c -L . -lft
 ```
 
 ### 🧪 Tests
@@ -164,7 +191,7 @@ libftprintf.a
 ---
 
 
-## 🛣 Project Roadmap
+## 🛣 Roadmap
 
 > - [X] `ℹ️  Task 1: Implement X`
 > - [ ] `ℹ️  Task 2: Implement Y`
@@ -184,7 +211,6 @@ Contributions are welcome! Here are several ways you can contribute:
 ---
 
 ## 📄 License
-
 
 This project is protected under the [UNLICENSE](https://choosealicense.com/licenses/unlicense) License. For more details, refer to the [LICENSE](LICENSE) file.
 
