@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:08:35 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/28 16:47:34 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/06/19 21:01:04 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
-
-int	ft_putstr(char *str, int count)
-{
-	int	bytes_written;
-
-	bytes_written = write(STDOUT, str, count);
-	ft_free(1, &str);
-	return (bytes_written);
-}
 
 t_context	ft_init_context(void)
 {
@@ -30,22 +21,48 @@ t_context	ft_init_context(void)
 	return (context);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_putstr(int fd, char *str, int count)
 {
-	va_list	arg;
+	int	bytes_written;
+
+	bytes_written = write(fd, str, count);
+	ft_free(1, &str);
+	return (bytes_written);
+}
+
+int	ft_vdprintf(int fd, const char *format, va_list ap)
+{
 	char	*str;
 	int		count;
 
-	if (!format)
-		return (-1);
 	count = 0;
 	str = ft_calloc(1, sizeof(char *));
 	if (!str)
 		return (-1);
-	va_start(arg, format);
-	ft_handle_format((char *)format, arg, &str, &count);
-	va_end(arg);
+	ft_handle_format((char *)format, ap, &str, &count);
 	if (!str)
 		return (-1);
-	return (ft_putstr(str, count));
+	return (ft_putstr(fd, str, count));
+}
+
+int	ft_dprintf(int fd, const char *format, ...)
+{
+	va_list	arg;
+	int		done;
+
+	va_start(arg, format);
+	done = ft_vdprintf(fd, format, arg);
+	va_end(arg);
+	return (done);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	arg;
+	int		done;
+
+	va_start(arg, format);
+	done = ft_vdprintf(STDOUT, format, arg);
+	va_end(arg);
+	return (done);
 }

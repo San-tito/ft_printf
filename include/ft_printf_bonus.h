@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/29 16:41:06 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/06/19 21:01:47 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 typedef struct s_flags
 {
-	int	left_justify : 1;
-	int	zero_padding : 1;
-	int	alternative_form : 1;
-	int	space_before : 1;
-	int	show_sign : 1;
-	int	has_precision : 1;
-	int	precision;
-	int	field_width;
+	int left_justify : 1;
+	int zero_padding : 1;
+	int alternative_form : 1;
+	int space_before : 1;
+	int show_sign : 1;
+	int has_precision : 1;
+	int		precision;
+	int		field_width;
 }			t_flags;
 
 typedef struct s_context
@@ -48,6 +48,8 @@ typedef struct s_context
 /*                                Main Function                               */
 /* ************************************************************************** */
 int			ft_printf(const char *format, ...);
+int			ft_dprintf(int fd, const char *format, ...);
+int			ft_vdprintf(int fd, const char *format, va_list ap);
 
 /* ************************************************************************** */
 /*                          Format handling functions                         */
@@ -64,7 +66,7 @@ void		ft_extract_precision(char **format, t_flags *flags,
 /* ************************************************************************** */
 /*                             Output functions                               */
 /* ************************************************************************** */
-int			ft_putstr(char *str, int count);
+int			ft_putstr(int fd, char *str, int count);
 
 /* ************************************************************************** */
 /*                          String manipulation functions                     */

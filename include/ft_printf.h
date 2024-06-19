@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:43:58 by sguzman           #+#    #+#             */
-/*   Updated: 2023/12/24 12:54:26 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/06/19 20:59:23 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 /*                                Main Function                               */
 /* ************************************************************************** */
 int		ft_printf(const char *format, ...);
+int		ft_dprintf(int fd, const char *format, ...);
+int		ft_vdprintf(int fd, const char *format, va_list ap);
 
 /* ************************************************************************** */
 /*                          Format handling functions                         */
@@ -37,7 +39,7 @@ void	*ft_init_conversion_handlers(void);
 /* ************************************************************************** */
 /*                             Output functions                               */
 /* ************************************************************************** */
-int		ft_putstr(char *str, int count);
+int		ft_putstr(int fd, char *str, int count);
 
 /* ************************************************************************** */
 /*                          String manipulation functions                     */
