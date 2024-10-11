@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:37:49 by sguzman           #+#    #+#             */
-/*   Updated: 2024/06/19 21:01:47 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/11 15:57:26 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 typedef struct s_flags
 {
-	int left_justify : 1;
-	int zero_padding : 1;
-	int alternative_form : 1;
-	int space_before : 1;
-	int show_sign : 1;
-	int has_precision : 1;
-	int		precision;
-	int		field_width;
+	int	left_justify:	1;
+	int	zero_padding:	1;
+	int	alternative_form:	1;
+	int	space_before:	1;
+	int	show_sign:	1;
+	int	has_precision:	1;
+	int	precision;
+	int	field_width;
 }			t_flags;
 
 typedef struct s_context
